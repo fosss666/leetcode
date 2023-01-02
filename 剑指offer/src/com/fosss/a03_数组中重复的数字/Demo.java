@@ -17,8 +17,31 @@ public class Demo {
         int[] nums={2,3,1,0,2,5,3};
         Demo demo = new Demo();
         //int repeatNumber = demo.findRepeatNumber(nums);
-        int repeatNumber = demo.findRepeatNumber2(nums);
+        //int repeatNumber = demo.findRepeatNumber2(nums);
+        int repeatNumber = demo.findRepeatNumber3(nums);
         System.out.println("repeatNumber = " + repeatNumber);
+    }
+
+    /**
+     * 原地交换
+     * 遍历数组并通过交换操作，使元素的索引与值一一对应（即 nums[i] = inums[i]=i ）
+     * 遍历中，第一次遇到数字 xx 时，将其交换至索引 xx 处；而当第二次遇到数字 xx 时，一定有 nums[x] = xnums[x]=x ，此时即可得到一组重复数字
+     */
+    public int findRepeatNumber3(int[] nums){
+        for (int i = 0; i < nums.length; i++) {
+            if(nums[i]==i){
+                continue;
+            }
+            if(nums[i]==nums[nums[i]]){
+                //重复数字
+                return nums[i];
+            }
+            //数字的交换
+            int temp=nums[i];
+            nums[i]=nums[nums[i]];
+            nums[temp]=temp;
+        }
+        return -1;
     }
 
     /**
