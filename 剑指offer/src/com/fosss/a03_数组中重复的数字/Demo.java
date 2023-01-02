@@ -14,7 +14,8 @@ import java.util.Set;
  */
 public class Demo {
     public static void main(String[] args) {
-        int[] nums={2,3,1,0,2,5,3};
+        //int[] nums={2,3,1,0,2,5,3};
+        int[] nums={3,4,2,1,1,0};
         Demo demo = new Demo();
         //int repeatNumber = demo.findRepeatNumber(nums);
         //int repeatNumber = demo.findRepeatNumber2(nums);
@@ -26,10 +27,14 @@ public class Demo {
      * 原地交换
      * 遍历数组并通过交换操作，使元素的索引与值一一对应（即 nums[i] = inums[i]=i ）
      * 遍历中，第一次遇到数字 xx 时，将其交换至索引 xx 处；而当第二次遇到数字 xx 时，一定有 nums[x] = xnums[x]=x ，此时即可得到一组重复数字
+     * 利用到所有数字都在 0～n-1 的范围内保证nums数组不会越界
      */
     public int findRepeatNumber3(int[] nums){
-        for (int i = 0; i < nums.length; i++) {
+        //只能用while循环，因为i不能每次循环都＋1，否则导致无法判断每个数字
+        int i=0;
+        while (i < nums.length){
             if(nums[i]==i){
+                i++;
                 continue;
             }
             if(nums[i]==nums[nums[i]]){
