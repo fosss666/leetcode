@@ -1,5 +1,8 @@
 package com.fosss.a03_数组中重复的数字;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author fosss
  * date 2023/1/2
@@ -13,8 +16,23 @@ public class Demo {
     public static void main(String[] args) {
         int[] nums={2,3,1,0,2,5,3};
         Demo demo = new Demo();
-        int repeatNumber = demo.findRepeatNumber(nums);
+        //int repeatNumber = demo.findRepeatNumber(nums);
+        int repeatNumber = demo.findRepeatNumber2(nums);
         System.out.println("repeatNumber = " + repeatNumber);
+    }
+
+    /**
+     * 利用set集合不可添加重复元素特性
+     */
+    public int findRepeatNumber2(int[] nums){
+        Set<Integer> set=new HashSet<>();
+        for (int num : nums) {
+            boolean isSuccess = set.add(num);
+            if (!isSuccess) {
+                return num;
+            }
+        }
+        return -1;
     }
 
     /**
