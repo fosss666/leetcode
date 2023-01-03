@@ -27,13 +27,51 @@ public class Demo {
                 //{18, 21, 23, 26, 30}
 
                 //{}
+
+                {1, 4, 7, 11, 15},
+                {2, 5, 8, 12, 19},
+                {3, 6, 9, 16, 22},
+                {10, 13, 14, 17, 24},
+                {18, 21, 23, 26, 30}
         };
         Demo demo = new Demo();
-        int target = 10;
+        int target = 5;
         //boolean numberIn2DArray = demo.findNumberIn2DArray(matrix, target);
         //boolean numberIn2DArray = demo.findNumberIn2DArray2(matrix, target);
-        boolean numberIn2DArray = demo.findNumberIn2DArray3(matrix, target);
+        //boolean numberIn2DArray = demo.findNumberIn2DArray3(matrix, target);
+        boolean numberIn2DArray = demo.findNumberIn2DArray4(matrix, target);
         System.out.println("numberIn2DArray = " + numberIn2DArray);
+    }
+
+    /**
+     * 旋转45°类似二叉搜索树
+     * 从矩阵 matrix 左下角元素（索引设为 (i, j) ）开始遍历，并与目标值对比：
+     * 当 matrix[i][j] > target 时，执行 i-- ，即消去第 i 行元素；
+     * 当 matrix[i][j] < target 时，执行 j++ ，即消去第 j 列元素；
+     * 当 matrix[i][j] = target 时，返回 true，代表找到目标值。
+     * 若行索引或列索引越界，则代表矩阵中无目标值，返回 false 。
+     */
+    public boolean findNumberIn2DArray4(int[][] matrix, int target) {
+        int m = matrix.length;
+        if (m == 0) {
+            //空数组
+            return false;
+        }
+        int n = matrix[0].length;
+        int x = m - 1;
+        int y = 0;
+        while (x >= 0 && y <= n - 1) {
+            if (target == matrix[x][y]) {
+                return true;
+            } else if (target < matrix[x][y]) {
+                //向上找
+                x--;
+            } else {
+                //向右找
+                y++;
+            }
+        }
+        return false;
     }
 
     /**
