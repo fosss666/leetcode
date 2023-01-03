@@ -20,20 +20,49 @@ package com.fosss.a04_二维数组中的查找;
 public class Demo {
     public static void main(String[] args) {
         int[][] matrix = {
-                /*
-                *   {1, 4, 7, 11, 15},
-                    {2, 5, 8, 12, 19},
-                    {3, 6, 9, 16, 22},
-                    {10, 13, 14, 17, 24},
-                    {18, 21, 23, 26, 30}
-                * */
-                {}
+                {1, 4, 7, 11, 15},
+                {2, 5, 8, 12, 19},
+                {3, 6, 9, 16, 22},
+                {10, 13, 14, 17, 24},
+                {18, 21, 23, 26, 30}
+
+                //{}
         };
         Demo demo = new Demo();
-        int target = 20;
-        boolean numberIn2DArray = demo.findNumberIn2DArray(matrix, target);
+        int target = 10;
+        //boolean numberIn2DArray = demo.findNumberIn2DArray(matrix, target);
+        boolean numberIn2DArray = demo.findNumberIn2DArray2(matrix, target);
         System.out.println("numberIn2DArray = " + numberIn2DArray);
     }
+
+    /**
+     * 二分查找（数组从左到右是递增的）
+     */
+    public boolean findNumberIn2DArray2(int[][] matrix, int target) {
+        for (int[] arr : matrix) {
+            int result = getBinarySearch(arr, 0, arr.length - 1, target);
+            if (result != -1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //二分查找算法
+    private int getBinarySearch(int[] arr, int left, int right, int target) {
+        if (left > right) {
+            return -1;
+        }
+        int mid = (left + right) / 2;
+        if (arr[mid] == target) {
+            return mid;
+        } else if (arr[mid] < target) {
+            return getBinarySearch(arr, mid + 1, right, target);
+        } else {
+            return getBinarySearch(arr, left, mid - 1, target);
+        }
+    }
+
 
     /**
      * 自解
@@ -42,7 +71,7 @@ public class Demo {
         int i = 0;
         for (i = 0; i < matrix.length; i++) {
             //防止二维数组中某一行中没有元素
-            if(matrix[i].length<1){
+            if (matrix[i].length < 1) {
                 continue;
             }
             if (matrix[i][0] == target) {
@@ -52,9 +81,9 @@ public class Demo {
                 break;
             }
         }
-        for(int j=0;j<i;j++){
-            for(int k=0;k<matrix[j].length;k++){
-                if(matrix[j][k]==target){
+        for (int j = 0; j < i; j++) {
+            for (int k = 0; k < matrix[j].length; k++) {
+                if (matrix[j][k] == target) {
                     return true;
                 }
             }
