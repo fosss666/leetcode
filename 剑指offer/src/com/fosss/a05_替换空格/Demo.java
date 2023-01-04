@@ -18,8 +18,24 @@ public class Demo {
         String s = "We are happy.";
         Demo demo = new Demo();
         //String string = demo.replaceSpace(s);
-        String string = demo.replaceSpace2(s);
+        //String string = demo.replaceSpace2(s);
+        String string = demo.replaceSpace3(s);
         System.out.println("string = " + string);
+    }
+
+    /**
+     * StringBuilder
+     */
+    public String replaceSpace3(String s){
+        StringBuilder sb = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if(c==' '){
+                sb.append("%20");
+            }else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
     }
 
     /**
