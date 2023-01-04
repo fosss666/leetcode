@@ -1,9 +1,6 @@
 package com.fosss.a06_从尾到头打印链表;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @author fosss
@@ -24,8 +21,25 @@ public class Demo {
 
         Demo demo = new Demo();
         //int[] ints = demo.reversePrint(head);
-        int[] ints = demo.reversePrint2(head);
+        //int[] ints = demo.reversePrint2(head);
+        int[] ints = demo.reversePrint3(head);
         System.out.println(Arrays.toString(ints));
+    }
+
+    /**
+     * 辅助栈
+     */
+    public int[] reversePrint3(ListNode head){
+        LinkedList<Integer> stack=new LinkedList<>();
+        while (head!=null){
+            stack.addFirst(head.val);
+            head=head.next;
+        }
+        int[] arr=new int[stack.size()];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i]=stack.get(i);
+        }
+        return arr;
     }
 
     /**
