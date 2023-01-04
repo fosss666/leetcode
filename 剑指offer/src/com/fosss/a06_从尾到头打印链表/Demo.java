@@ -22,8 +22,31 @@ public class Demo {
         Demo demo = new Demo();
         //int[] ints = demo.reversePrint(head);
         //int[] ints = demo.reversePrint2(head);
-        int[] ints = demo.reversePrint3(head);
+        //int[] ints = demo.reversePrint3(head);
+        int[] ints = demo.reversePrint4(head);
         System.out.println(Arrays.toString(ints));
+    }
+
+    /**
+     * 递归
+     */
+    public List<Integer> list=new ArrayList<>();
+    public int[] reversePrint4(ListNode head) {
+
+        reverse(head);
+        int[] arr=new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            arr[i]=list.get(i);
+        }
+        return arr;
+    }
+    //递归方法
+    private void reverse(ListNode head){
+        if(head==null){
+            return;
+        }
+        reverse(head.next);
+        list.add(head.val);
     }
 
     /**
