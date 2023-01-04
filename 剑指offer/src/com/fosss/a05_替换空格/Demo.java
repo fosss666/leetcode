@@ -27,6 +27,7 @@ public class Demo {
      * StringBuilder
      */
     public String replaceSpace3(String s){
+
         StringBuilder sb = new StringBuilder();
         for (char c : s.toCharArray()) {
             if(c==' '){
