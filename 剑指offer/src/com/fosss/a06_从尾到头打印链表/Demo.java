@@ -3,6 +3,7 @@ package com.fosss.a06_从尾到头打印链表;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * @author fosss
@@ -22,12 +23,29 @@ public class Demo {
         node2.next=node3;
 
         Demo demo = new Demo();
-        int[] ints = demo.reversePrint(head);
+        //int[] ints = demo.reversePrint(head);
+        int[] ints = demo.reversePrint2(head);
         System.out.println(Arrays.toString(ints));
     }
 
     /**
-     * 自解
+     * 利用栈
+     */
+    public int[] reversePrint2(ListNode head){
+        Stack<Integer> stack=new Stack<>();
+        while (head!=null){
+            stack.push(head.val);
+            head=head.next;
+        }
+        int[] arr=new int[stack.size()];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i]=stack.pop();
+        }
+        return arr;
+    }
+
+    /**
+     * 自解-利用List集合
      */
     public int[] reversePrint(ListNode head) {
         List<Integer> list=new ArrayList<>();
