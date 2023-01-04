@@ -1,0 +1,68 @@
+package com.fosss.a06_从尾到头打印链表;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * @author fosss
+ * date 2023/1/4
+ * description：
+ * 输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
+ * 例：输入：head = [1,3,2]
+ *    输出：[2,3,1]
+ * 限制： 0 <= 链表长度 <= 10000
+ */
+public class Demo {
+    public static void main(String[] args) {
+        ListNode head=new ListNode(1);
+        ListNode node2 = new ListNode(3);
+        ListNode node3=new ListNode(2);
+        head.next=node2;
+        node2.next=node3;
+
+        Demo demo = new Demo();
+        int[] ints = demo.reversePrint(head);
+        System.out.println(Arrays.toString(ints));
+    }
+
+    /**
+     * 自解
+     */
+    public int[] reversePrint(ListNode head) {
+        List<Integer> list=new ArrayList<>();
+        while (head!= null) {
+            list.add(head.val);
+            head=head.next;
+        }
+        int[] arr=new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            arr[i]=list.get(list.size()-i-1);
+        }
+        return arr;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
