@@ -22,12 +22,15 @@ public class Demo {
         System.out.println("treeNode.val = " + treeNode.val);
     }
 
-    /**
-     * 递归
-     */
+
     //用来存储中序遍历中个元素的下标
     Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 
+    /**
+     * @param preorder 前序遍历的值数组
+     * @param inorder  中序遍历的值数组
+     * @return 树的根结点
+     */
     public TreeNode buildTree(int[] preorder, int[] inorder) {
 
         //初始化map
@@ -39,6 +42,7 @@ public class Demo {
 
 
     private TreeNode recursion(int[] preorder, int l1, int r1, int[] inorder, int l2, int r2) {
+        //递归结束条件
         if (l1 > r1 || l2 > r2) {
             return null;
         }
@@ -49,9 +53,9 @@ public class Demo {
         //左子树的结点个数,根据中序
         int size = index - l2;
         //递归设置左子树
-        root.left = recursion(preorder, l1 + 1, l1 + size, inorder, l2, index-1);
+        root.left = recursion(preorder, l1 + 1, l1 + size, inorder, l2, index - 1);
         //递归设置右子树
-        root.right = recursion(preorder, l1 + size + 1, r1, inorder, index+1, r2);
+        root.right = recursion(preorder, l1 + size + 1, r1, inorder, index + 1, r2);
 
         return root;
     }
