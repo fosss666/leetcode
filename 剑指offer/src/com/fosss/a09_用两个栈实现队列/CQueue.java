@@ -1,4 +1,4 @@
-package com.fosss.a08_用两个栈实现队列;
+package com.fosss.a09_用两个栈实现队列;
 
 import java.util.Stack;
 
