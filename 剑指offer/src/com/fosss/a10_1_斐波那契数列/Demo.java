@@ -1,4 +1,4 @@
-package com.fosss.a10_斐波那契数列;
+package com.fosss.a10_1_斐波那契数列;
 
 /**
  * @author fosss
