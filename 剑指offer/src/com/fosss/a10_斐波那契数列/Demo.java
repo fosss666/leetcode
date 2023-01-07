@@ -14,19 +14,35 @@ package com.fosss.a10_斐波那契数列;
 public class Demo {
     public static void main(String[] args) {
         Demo demo = new Demo();
-        int fib = demo.fib(44);
+        int fib = demo.fib2(5);
         System.out.println("fib = " + fib);
 
+    }
+
+    /**
+     * 动态规划
+     */
+    public int fib2(int n) {
+        int f1 = 0, f2 = 1, f3 = 0;
+        if (n < 2) {
+            return n;
+        }
+        for (int i = 2; i <= n; i++) {
+            f3 = (f1 + f2) % 1000000007;
+            f1 = f2;
+            f2 = f3;
+        }
+        return f3;
     }
 
     /**
      * 递归_超时了，废弃
      */
     public int fib(int n) {
-        if(n<2){
+        if (n < 2) {
             return n;
         }
-        return fib(n-2)+fib(n-1);
+        return fib(n - 2) + fib(n - 1);
     }
 }
 
