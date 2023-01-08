@@ -40,11 +40,11 @@ public class Solution {
         while (left <= right) {
             mid = left + (right - left) / 2;//之所以不写成(left+right+/2是防止left+right后的值太大超出int范围！！！！！！！！！
             if (numbers[mid] < numbers[right]) {
-                //向左找
-                right = mid;
+                //向左找，抛弃查找right右边的数
+                right = mid;//注意这里不能-1，否则最小值的下标为此次循环的mid的时候，导致下一次循环跳过了此次mid,mid的值发生改变，而不能返回此次循环正确的mid
             } else if (numbers[mid] > numbers[right]) {
-                //向右找
-                left = mid + 1;
+                //向右找，抛弃查找right左边的数
+                left = mid + 1;//注意这里要+1，否则可能出现mid始终等于left的情况
             } else {
                 //numbers[mid]==numbers[right],不能保证mid左边没有更小的值，所以不能直接结束，
                 // 因为此时numbers[right]有numbers[mid]这个替代值，所以可以忽略right代表的下标
