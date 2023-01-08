@@ -22,10 +22,36 @@ import java.util.List;
 public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int[] numbers = {2, 2, 2, 0, 1};
-        int i = solution.minArray(numbers);
+        int[] numbers = {3, 1};
+        //int i = solution.minArray(numbers);
+        int i = solution.minArray2(numbers);
         System.out.println("i = " + i);
 
+    }
+
+    /**
+     * 二分查找法
+     */
+    public int minArray2(int[] numbers) {
+
+        int left = 0;
+        int right = numbers.length - 1;
+        int mid = -1;
+        while (left <= right) {
+            mid = left + (right - left) / 2;//之所以不写成(left+right+/2是防止left+right后的值太大超出int范围！！！！！！！！！
+            if (numbers[mid] < numbers[right]) {
+                //向左找
+                right = mid;
+            } else if (numbers[mid] > numbers[right]) {
+                //向右找
+                left = mid + 1;
+            } else {
+                //numbers[mid]==numbers[right],不能保证mid左边没有更小的值，所以不能直接结束，
+                // 因为此时numbers[right]有numbers[mid]这个替代值，所以可以忽略right代表的下标
+                right--;
+            }
+        }
+        return numbers[mid];
     }
 
     /**
