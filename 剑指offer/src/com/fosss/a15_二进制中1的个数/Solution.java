@@ -13,8 +13,14 @@ import java.util.Scanner;
 public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int result = solution.hammingWeight(11);
+        int result = solution.hammingWeight2(11);
         System.out.println("result = " + result);
+    }
+    /**
+     * 调用api
+     */
+    public int hammingWeight2(int n){
+        return Integer.bitCount(n);
     }
 
     /**
