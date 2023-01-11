@@ -17,10 +17,36 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        double result = solution.myPow2(2.00000, -2147483648);
+        double result = solution.myPow3(2.00000, -3);
         System.out.println("result = " + result);
     }
 
+    /**
+     * 快速幂+迭代
+     */
+    public double myPow3(double x, int n) {
+        if (n == 0) {
+            return 1.0;
+        }
+        long N=n;
+        return N > 0 ? iteration(x, N) : 1.0 / iteration(x, -N);
+    }
+
+    private double iteration(double x, long n) {
+        double result = 1.0;
+        //贡献量初始为x
+        double contribution = x;
+        while (n > 0) {
+            if (n % 2 == 1) {
+                //n不能整除2，则结果要乘贡献量
+                result *= contribution;
+            }
+            //每个循环贡献两都要随x平方
+            contribution *= contribution;
+            n /= 2;
+        }
+        return result;
+    }
 
     /**
      * 快速幂+递归
@@ -31,11 +57,16 @@ public class Solution {
      * 递归的边界为 n = 0，任意数的 0 次方均为 1
      */
     public double myPow2(double x, int n) {
+        if (n == 0) {
+            return 1.0;
+        }
+        //要转为long，因为int最小值为-2^31,最大值为2^31-1,所以负数为最小值时不能直接转为正数！！
+        long N=n;
         //x<0则求出-x的n次方再取倒数
-        return n > 0 ? recursion(x, n) : 1.0 / recursion(x, -n);
+        return N > 0 ? recursion(x, N) : 1.0 / recursion(x, -N);
     }
 
-    private double recursion(double x, int n) {
+    private double recursion(double x, long n) {
         //结束条件
         if (n == 0) {
             return 1.0;
