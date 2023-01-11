@@ -1,7 +1,5 @@
 package com.fosss.a16_数值的整数次方;
 
-import javax.management.remote.rmi._RMIConnection_Stub;
-import java.math.BigInteger;
 
 /**
  * @author fosss
@@ -19,13 +17,36 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        double result = solution.myPow(2.00000, -2147483648);
+        double result = solution.myPow2(2.00000, -2147483648);
         System.out.println("result = " + result);
+    }
+
+
+    /**
+     * 快速幂+递归
+     */
+    /**
+     * 当我们要计算 x的n次方时，我们可以先递归地计算出 y = x的[n/2]次方，其中 [a] 表示对 a 进行下取整:
+     * 根据递归计算的结果，如果 n 为偶数，那么 x的n次方= y的平方;如果 n 为奇数，那么 x的n次方=y的平方*x
+     * 递归的边界为 n = 0，任意数的 0 次方均为 1
+     */
+    public double myPow2(double x, int n) {
+        //x<0则求出-x的n次方再取倒数
+        return n > 0 ? recursion(x, n) : 1.0 / recursion(x, -n);
+    }
+
+    private double recursion(double x, int n) {
+        //结束条件
+        if (n == 0) {
+            return 1.0;
+        }
+        double y = recursion(x, n / 2);
+        //根据n是否能够整除2进行不同的计算
+        return n % 2 == 0 ? y * y : y * y * x;
     }
 
     /**
      * for循环，考虑太多，不适用
-     *
      */
     public double myPow(double x, int n) {
         double result = 1.0;
