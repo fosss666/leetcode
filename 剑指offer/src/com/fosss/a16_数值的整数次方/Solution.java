@@ -17,7 +17,7 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        double result = solution.myPow3(2.00000, -3);
+        double result = solution.myPow3(2.00000, 4);
         System.out.println("result = " + result);
     }
 
@@ -25,9 +25,6 @@ public class Solution {
      * 快速幂+迭代
      */
     public double myPow3(double x, int n) {
-        if (n == 0) {
-            return 1.0;
-        }
         long N=n;
         return N > 0 ? iteration(x, N) : 1.0 / iteration(x, -N);
     }
@@ -57,9 +54,6 @@ public class Solution {
      * 递归的边界为 n = 0，任意数的 0 次方均为 1
      */
     public double myPow2(double x, int n) {
-        if (n == 0) {
-            return 1.0;
-        }
         //要转为long，因为int最小值为-2^31,最大值为2^31-1,所以负数为最小值时不能直接转为正数！！
         long N=n;
         //x<0则求出-x的n次方再取倒数
