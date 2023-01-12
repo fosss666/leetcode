@@ -30,11 +30,8 @@ public class Solution {
         }
         int s = (int) Math.pow(10.0, n);
         int[] arr = new int[s - 1];
-        for (int i = 0; i < s; i++) {
-            if (i + 1 == s) {
-                break;
-            }
-            arr[i] = i + 1;
+        for (int i = 0; i < s-1; i++) {
+            arr[i]=i+1;
         }
         return arr;
     }
