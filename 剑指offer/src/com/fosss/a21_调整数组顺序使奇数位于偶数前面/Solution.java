@@ -22,6 +22,32 @@ public class Solution {
         System.out.println(Arrays.toString(arr));
     }
 
+    /**
+     * 原地交换
+     */
+    public int[] exchange5(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right) {
+            //从左往右找到偶数
+            while (left < right && isOod(nums[left])) {
+                left++;
+            }
+            //从右往左找到奇数
+            while (left < right && !isOod(nums[right])) {
+                right--;
+            }
+            if (left < right) {
+                //进行交换
+                int t = nums[left];
+                nums[left] = nums[right];
+                nums[right] = t;
+                left++; //!!
+                right--;//!!
+            }
+        }
+        return nums;
+    }
 
     /**
      * 双指针+一次遍历
