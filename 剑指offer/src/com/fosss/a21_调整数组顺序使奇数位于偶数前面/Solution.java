@@ -16,10 +16,29 @@ public class Solution {
 
     public static void main(String[] args) {
         //int[] nums = {2, 16, 3, 5, 13, 1, 16, 1, 12, 18, 11, 8, 11, 11, 5, 1};
-        int[] nums = {1,2,3,4};
+        int[] nums = {1, 2, 3, 4};
         Solution solution = new Solution();
-        int[] arr = solution.exchange2(nums);
+        int[] arr = solution.exchange(nums);
         System.out.println(Arrays.toString(arr));
+    }
+
+    /**
+     * 两次遍历
+     */
+    public int[] exchange3(int[] nums) {
+        int n = nums.length, index = 0;
+        int[] res = new int[n];
+        for (int num : nums) {
+            if (num % 2 == 1) {
+                res[index++] = num;
+            }
+        }
+        for (int num : nums) {
+            if (num % 2 == 0) {
+                res[index++] = num;
+            }
+        }
+        return res;
     }
 
     /**
@@ -27,18 +46,18 @@ public class Solution {
      */
     public int[] exchange2(int[] nums) {
         //将数组转为集合
-        List<Integer> list=new ArrayList<>();
-        List<Integer> list2=new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
         for (int num : nums) {
             list.add(num);
-            if(isOod(num)){
+            if (isOod(num)) {
                 list2.add(num);
             }
         }
         list.removeAll(list2);
         list2.addAll(list);
         for (int i = 0; i < list2.size(); i++) {
-            nums[i]=list2.get(i);
+            nums[i] = list2.get(i);
         }
         return nums;
     }
@@ -48,14 +67,14 @@ public class Solution {
      */
     public int[] exchange(int[] nums) {
         //记录偶数下标
-        Queue<Integer> oIndex=new LinkedList<>();
+        Queue<Integer> oIndex = new LinkedList<>();
         for (int i = 0; i < nums.length; i++) {
             int num = nums[i];
             if (isOod(num)) {
                 //和偶数交换
                 //弹出偶数下标
                 Integer index = oIndex.poll();
-                if (index!=null) {
+                if (index != null) {
                     int t = nums[i];
                     nums[i] = nums[index];
                     nums[index] = t;
