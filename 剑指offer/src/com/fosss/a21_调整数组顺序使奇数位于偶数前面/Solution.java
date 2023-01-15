@@ -22,6 +22,24 @@ public class Solution {
         System.out.println(Arrays.toString(arr));
     }
 
+
+    /**
+     * 双指针+一次遍历
+     */
+    public int[] exchange4(int[] nums) {
+        int n = nums.length;
+        int[] res = new int[n];
+        int left = 0, right = n - 1;
+        for (int num : nums) {
+            if (num % 2 == 1) {
+                res[left++] = num;
+            } else {
+                res[right--] = num;
+            }
+        }
+        return res;
+    }
+
     /**
      * 两次遍历
      */
