@@ -1,6 +1,8 @@
 package com.fosss.a21_调整数组顺序使奇数位于偶数前面;
 
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author fosss
@@ -16,8 +18,29 @@ public class Solution {
         //int[] nums = {2, 16, 3, 5, 13, 1, 16, 1, 12, 18, 11, 8, 11, 11, 5, 1};
         int[] nums = {1,2,3,4};
         Solution solution = new Solution();
-        int[] arr = solution.exchange(nums);
+        int[] arr = solution.exchange2(nums);
         System.out.println(Arrays.toString(arr));
+    }
+
+    /**
+     * 自解-挑选奇数-超时。。。
+     */
+    public int[] exchange2(int[] nums) {
+        //将数组转为集合
+        List<Integer> list=new ArrayList<>();
+        List<Integer> list2=new ArrayList<>();
+        for (int num : nums) {
+            list.add(num);
+            if(isOod(num)){
+                list2.add(num);
+            }
+        }
+        list.removeAll(list2);
+        list2.addAll(list);
+        for (int i = 0; i < list2.size(); i++) {
+            nums[i]=list2.get(i);
+        }
+        return nums;
     }
 
     /**
