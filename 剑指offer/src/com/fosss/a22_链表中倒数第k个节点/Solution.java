@@ -10,6 +10,24 @@ package com.fosss.a22_链表中倒数第k个节点;
 public class Solution {
 
     /**
+     * 双指针(不用统计链表长度)
+     */
+    public ListNode getKthFromEnd2(ListNode head, int k) {
+        //定义快慢指针
+        ListNode fast = head, slow = head;
+        //先让快指针走k个结点，然后快慢指针同时走，一致走到快指针为空,即链表尾部时，此时慢指针就指向了所需结点
+        while (fast != null && k > 0) {
+            fast = fast.next;
+            k--;
+        }
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
+    /**
      * 自解
      */
     public ListNode getKthFromEnd(ListNode head, int k) {
