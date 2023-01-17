@@ -21,12 +21,30 @@ public class Solution {
         node3.next = node4;
         node4.next = node5;
         Solution solution = new Solution();
-        ListNode newHead = solution.reverseList2(node);
+        ListNode newHead = solution.reverseList3(node);
         while (newHead != null) {
             System.out.print(newHead.val + " ");
             newHead = newHead.next;
         }
 
+    }
+
+    /**
+     * 改变指针指向
+     */
+    public ListNode reverseList3(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        ListNode left=null;
+        ListNode cur=head;
+        while (cur!=null){
+            ListNode right=cur.next;
+            cur.next=left;
+            left=cur;
+            cur=right;
+        }
+        return left;
     }
 
     /**
