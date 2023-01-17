@@ -21,7 +21,7 @@ public class Solution {
         node3.next = node4;
         node4.next = node5;
         Solution solution = new Solution();
-        ListNode newHead = solution.reverseList(node);
+        ListNode newHead = solution.reverseList2(node);
         while (newHead != null) {
             System.out.print(newHead.val + " ");
             newHead = newHead.next;
@@ -30,10 +30,28 @@ public class Solution {
     }
 
     /**
+     * 自解，头插法
+     */
+    public ListNode reverseList2(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+        ListNode newHead = new ListNode(head.val);
+        while (head.next != null) {
+            head = head.next;
+            //进行头插
+            ListNode temp = new ListNode(head.val);
+            temp.next = newHead;
+            newHead = temp;
+        }
+        return newHead;
+    }
+
+    /**
      * 自解，使用栈
      */
     public ListNode reverseList(ListNode head) {
-        if(head == null){
+        if (head == null) {
             return head;
         }
         Stack<Integer> stack = new Stack<>();
