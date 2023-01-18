@@ -22,11 +22,35 @@ public class Solution {
         node22.next = node33;
 
         Solution solution = new Solution();
-        ListNode newHead = solution.mergeTwoLists3(node1, node11);
+        ListNode newHead = solution.mergeTwoLists4(node1, node11);
         while (newHead != null) {
             System.out.print(newHead.val + " ");
             newHead = newHead.next;
         }
+    }
+
+    /**
+     * 官解
+     */
+    public ListNode mergeTwoLists4(ListNode l1, ListNode l2) {
+        ListNode prehead = new ListNode(-1);
+
+        ListNode prev = prehead;
+        while (l1 != null && l2 != null) {
+            if (l1.val <= l2.val) {
+                prev.next = l1;
+                l1 = l1.next;
+            } else {
+                prev.next = l2;
+                l2 = l2.next;
+            }
+            prev = prev.next;
+        }
+
+        // 合并后 l1 和 l2 最多只有一个还未被合并完，我们直接将链表末尾指向未合并完的链表即可！！直接指向，秒啊
+        prev.next = l1 == null ? l2 : l1;
+
+        return prehead.next;
     }
 
     /**
