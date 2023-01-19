@@ -46,6 +46,21 @@ public class Solution {
     }
 
     /**
+     * 递归
+     */
+    public boolean isSubStructure2(TreeNode A, TreeNode B) {
+        //以节点A为根节点的子树包含树B，对应recur(A,B)；
+        //树B是树A左子树的子结构，对应isSubStructure(A.left,B)；
+        //树B是树A右子树的子结构，对应isSubStructure(A.right,B)；
+        return (A != null && B != null) && (recur(A, B) || isSubStructure(A.left, B) || isSubStructure(A.right, B));
+    }
+    boolean recur(TreeNode A, TreeNode B) {
+        if(B == null) return true;
+        if(A == null || A.val != B.val) return false;
+        return recur(A.left, B.left) && recur(A.right, B.right);
+    }
+
+    /**
      * 自解
      */
     public boolean isSubStructure(TreeNode A, TreeNode B) {
