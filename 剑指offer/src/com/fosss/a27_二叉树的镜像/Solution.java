@@ -1,5 +1,9 @@
 package com.fosss.a27_二叉树的镜像;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 /**
  * @author fosss
  * @date 2023/1/20
@@ -29,10 +33,41 @@ public class Solution {
         System.out.println("原来的树：");
         TreeNode.indexOrder(node1);
         System.out.println("\n现在的树：");
-        TreeNode treeNode = solution.mirrorTree(node1);
+        TreeNode treeNode = solution.mirrorTree2(node1);
         TreeNode.indexOrder(treeNode);
 
     }
+
+    /**
+     * 使用集合或栈或队列,将每棵树的左右子树进行交换
+     */
+    public TreeNode mirrorTree2(TreeNode root) {
+        if (root == null) return null;
+        List<TreeNode> list = new ArrayList<>();
+        list.add(root);
+        while (!list.isEmpty()) {
+            TreeNode node = list.remove(0);
+            if (node.left != null) list.add(node.left);
+            if (node.right != null) list.add(node.right);
+            TreeNode tmp = node.left;
+            node.left = node.right;
+            node.right = tmp;
+        }
+        return root;
+        //if (root == null) return null;
+        //Stack<TreeNode> stack = new Stack<>();
+        //stack.push(root);
+        //while (!stack.isEmpty()) {
+        //    TreeNode node = stack.pop();
+        //    if (node.left != null) stack.add(node.left);
+        //    if (node.right != null) stack.add(node.right);
+        //    TreeNode tmp = node.left;
+        //    node.left = node.right;
+        //    node.right = tmp;
+        //}
+        //return root;
+    }
+
 
     /**
      * 递归!!
