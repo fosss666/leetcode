@@ -1,7 +1,9 @@
 package com.fosss.a28_判断二叉树是不是对称的;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * @author fosss
@@ -26,24 +28,43 @@ public class Solution {
         node3.right = node7;
 
         Solution solution = new Solution();
-        boolean result = solution.isSymmetric(node1);
+        boolean result = solution.isSymmetric2(node1);
         System.out.println("result = " + result);
     }
 
+        /**
+     * 递归判断左右子树是否相等
+     */
+    public boolean isSymmetric2(TreeNode root) {
+        return judgment(root, root);
+    }
+
+    private boolean judgment(TreeNode root1, TreeNode root2) {
+        if (root1 == null && root2 == null) {
+            return true;
+        }
+        if (root1 == null || root2 == null || root1.val != root2.val) {
+            return false;
+        }
+        return judgment(root1.left, root2.right) && judgment(root1.right, root2.left);
+    }
+
     /**
-     * 自解
+     * 自解，构造镜像树
      */
     public boolean isSymmetric(TreeNode root) {
 
-        if(root==null){
+        if (root == null) {
             return true;
         }
         //先求出二叉树的对称，再进行比较
         List<Integer> rootList = new ArrayList<>();
         List<Integer> cloneRootList = new ArrayList<>();
-
+        //获取二叉树的元素
         symmetry(root, rootList);
+        //镜像
         getSymmetry(root);
+        //获取二叉树的元素
         symmetry(root, cloneRootList);
 
         for (int i = 0; i < rootList.size(); i++) {
