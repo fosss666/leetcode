@@ -32,7 +32,39 @@ public class Solution {
         System.out.println("result = " + result);
     }
 
-        /**
+    /**
+     * 迭代
+     */
+    public boolean isSymmetric3(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return check2(root, root);
+    }
+
+    private boolean check2(TreeNode root1, TreeNode root2) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root1);
+        queue.add(root2);
+        while (!queue.isEmpty()) {
+            TreeNode n1 = queue.poll();
+            TreeNode n2 = queue.poll();
+            if (n1 == null && n2 == null) {
+                continue;//进行下一个循环判断
+            }
+            if (n1 == null || n2 == null || n1.val != n2.val) {
+                return false;
+            }
+            queue.add(n1.left);
+            queue.add(n2.right);
+            queue.add(n1.right);
+            queue.add(n2.left);
+        }
+        return true;
+    }
+
+
+    /**
      * 递归判断左右子树是否相等
      */
     public boolean isSymmetric2(TreeNode root) {
