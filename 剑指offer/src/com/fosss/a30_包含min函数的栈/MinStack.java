@@ -52,13 +52,15 @@ public class MinStack {
         } else if (x <= minStack.getFirst()) {
             minStack.addFirst(x);
         } else {
-            minStack.addLast(x);
+            minStack.addLast(x);//根据k神代码，这里根本不需要存储大于minStack.getFirst()的值，例如先添加3和4，pop的时候3永远是在4后面被pop
         }
+
         stack.push(x);
     }
 
     public void pop() {
         Integer pop = stack.pop();
+        //此题如果用==将会无法通过 Integer的equals重写过，比较的是内部value的值， ==如果在[-128,127]会被cache缓存,超过这个范围则比较的是对象是否相同
         if (pop.equals(minStack.getFirst())) {
             minStack.removeFirst();
         }
