@@ -32,7 +32,9 @@ public class Solution {
         if (root == null) {
             return new int[0];
         }
+        //用来装数值
         List<Integer> list = new ArrayList<>();
+        //用来装结点
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         function(list, queue);
@@ -40,7 +42,7 @@ public class Solution {
         return arr;
     }
 
-    private List<Integer> function(List<Integer> list, Queue<TreeNode> queue) {
+    private void function(List<Integer> list, Queue<TreeNode> queue) {
         TreeNode root = null;
         while (queue.size() > 0) {
             root = queue.poll();
@@ -52,7 +54,6 @@ public class Solution {
                 queue.add(root.right);
             }
         }
-        return list;
     }
 }
 
