@@ -33,6 +33,10 @@ public class Solution {
 
     /**
      * 自解，辅助队列，LinkedList，取模
+     * <p>
+     * 巧妙的思想：
+     * 1.直接根据result的个数来进行分层，无需借助取模 f(res.size() % 2 == 1)
+     * 2.利用Collections的api来实现集合的倒序  Collections.reverse(tmp);
      */
     public List<List<Integer>> levelOrder(TreeNode root) {
         if (root == null) {
