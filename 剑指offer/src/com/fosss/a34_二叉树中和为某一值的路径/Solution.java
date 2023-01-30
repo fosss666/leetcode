@@ -32,7 +32,8 @@ public class Solution {
     }
 
     /**
-     * 回溯法
+     * 回溯法（一种算法思想，需要退回上一步，可用递归（一种算法结构）实现）
+     * 深度优先算法
      */
     List<List<Integer>> res = new ArrayList<>();
     LinkedList<Integer> stack = new LinkedList<>();
@@ -43,7 +44,7 @@ public class Solution {
     }
 
     //回溯
-    void recur(TreeNode root, int target) {
+    private void recur(TreeNode root, int target) {
         if (root == null) {
             return;
         }
