@@ -20,6 +20,46 @@ public class Solution {
 
 
     /**
+     * 拼接拆分
+     * 考虑构建 原节点 1 -> 新节点 1 -> 原节点 2 -> 新节点 2 -> …… 的拼接链表，如此便可在访问原节点的 random 指向节点的同时找到新对应新节
+     * 点的 random 指向节点
+     */
+    public Node copyRandomList2(Node head) {
+        if (head == null) {
+            return null;
+        }
+        //拼接
+        Node temp = head;
+        while (temp != null) {
+            Node next = temp.next;//存下来
+            temp.next = new Node(temp.val);//拼接的时候一定要new
+            temp.next.next = next;
+            temp = next;
+        }
+        //构建random
+        temp = head;
+        while (temp != null) {
+            temp.next.random = temp.random == null ? null : temp.random.next;
+            temp = temp.next.next;
+        }
+
+        //拆分,将链表拆分成原链表和复制的链表，注意这里不把原链表拆分出来，只拆分所需链表leetcode不通过
+        Node newHead = head.next;
+        temp = newHead;
+        Node pre = head;
+        //temp.next只要不为空，temp.next.next就不为空（因为它是temp.next复制得来的）
+        while (temp.next != null) {
+            pre.next = pre.next.next;
+            temp.next = temp.next.next;
+            temp = temp.next;
+            pre = pre.next;
+        }
+        //处理原链表的尾部！！原来是指向它的复制的，所以需要置空
+        pre.next = null;
+        return newHead;
+    }
+
+    /**
      * 哈希表
      * 构建原链表和新链表结点一一对应的键值对
      */
