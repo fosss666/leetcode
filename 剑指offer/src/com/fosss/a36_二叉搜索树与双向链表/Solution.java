@@ -11,6 +11,37 @@ import java.util.List;
  */
 public class Solution {
 
+    /**
+     * 中序遍历，不借助集合
+     */
+    Node pre = null;
+    Node head = null;
+
+    public Node treeToDoublyList2(Node root) {
+        if (root == null) {
+            return null;
+        }
+        dfs(root);
+        //处理首尾结点
+        head.left = pre;
+        pre.right = head;
+        return head;
+    }
+
+    private void dfs(Node root) {
+        if (root == null) {
+            return;
+        }
+        dfs(root.left);
+        if (pre == null) {
+            head = root;
+        } else {
+            pre.right = root;
+            root.left = pre;
+        }
+        pre = root;
+        dfs(root.right);
+    }
 
     /**
      * 自解，中序遍历+集合
