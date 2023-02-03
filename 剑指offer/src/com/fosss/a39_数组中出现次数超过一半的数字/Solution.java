@@ -19,6 +19,19 @@ public class Solution {
     }
 
     /**
+     * 摩尔投票法
+     * https://leetcode.cn/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/solution/mian-shi-ti-39-shu-zu-zhong-chu-xian-ci-shu-chao-3/
+     */
+    public int majorityElement3(int[] nums) {
+        int x = 0, votes = 0;
+        for(int num : nums){
+            if(votes == 0) x = num;
+            votes += num == x ? 1 : -1;
+        }
+        return x;
+    }
+
+    /**
      * 排序取中间，因为此题中一定存在一个个数超过长度一半的数，所以进行排序后中间的那个数就是所要找的数
      * 57.41%  81.81%
      */
