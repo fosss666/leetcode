@@ -14,12 +14,23 @@ public class Solution {
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 2, 2, 2, 5, 4, 2};
         Solution solution = new Solution();
-        int res = solution.majorityElement(arr);
+        int res = solution.majorityElement2(arr);
         System.out.println("res = " + res);
     }
 
     /**
+     * 排序取中间，因为此题中一定存在一个个数超过长度一半的数，所以进行排序后中间的那个数就是所要找的数
+     * 57.41%  81.81%
+     */
+    public int majorityElement2(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+    }
+
+    /**
      * 自解，遍历查找,map记录
+     * 执行用时：13 ms, 在所有 Java 提交中击败了19.97%的用户
+     * 内存消耗：45.1 MB, 在所有 Java 提交中击败了45.53%的用户
      */
     public int majorityElement(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>();
