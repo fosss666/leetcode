@@ -23,12 +23,44 @@ public class Solution {
      * 自解，排序
      */
     public int[] getLeastNumbers(int[] arr, int k) {
-        Arrays.sort(arr);
+        //Arrays.sort(arr);
+        quickSort(arr, 0, arr.length - 1);
         int[] res = new int[k];
         for (int i = 0; i < k; i++) {
             res[i] = arr[i];
         }
         return res;
+    }
+
+    /**
+     * 快排
+     */
+    private void quickSort(int[] arr, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        int l = left, r = right;
+        int key = arr[left];
+        while (l < r) {
+            while (l < r && arr[r] > key) {
+                r--;
+            }
+            if (l < r) {
+                arr[l] = arr[r];
+                l++;
+            }
+            while (l < r && arr[l] < key) {
+                l++;
+            }
+            if (l < r) {
+                arr[r] = arr[l];
+                r--;
+            }
+        }
+        arr[l] = key;
+        quickSort(arr, left, l - 1);
+        quickSort(arr, l + 1, right);
+
     }
 }
 
