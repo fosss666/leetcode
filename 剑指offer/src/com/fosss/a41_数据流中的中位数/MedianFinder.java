@@ -16,6 +16,15 @@ import java.util.Queue;
  */
 class MedianFinder {
 
+    public static void main(String[] args) {
+        MedianFinder medianFinder = new MedianFinder();
+        medianFinder.addNum(2);
+        medianFinder.addNum(3);
+        medianFinder.addNum(4);
+        double res = medianFinder.findMedian();
+        System.out.println("res = " + res);
+    }
+
     Queue<Integer> A, B;
 
     /**
