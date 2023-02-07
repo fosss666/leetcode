@@ -11,8 +11,36 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int res = solution.countDigitOne(12);
+        int res = solution.countDigitOne2(12);
         System.out.println("res = " + res);
+    }
+
+    /**
+     * k神，分别判断
+     */
+    public int countDigitOne2(int n) {
+        //dight代表位数
+        int digit = 1, res = 0;
+        //high代表当前位左边的所有数,low代表当前位右边的所有数
+        int high = n / 10, cur = n % 10, low = 0;
+        while (high != 0 || cur != 0) {
+            if (cur == 0) {
+                //推出来的公式
+                res += high * digit;
+            } else if (cur == 1) {
+                //推出来的公式
+                res += high * digit + low + 1;
+            } else {
+                //推出来的公式
+                res += (high + 1) * digit;
+            }
+            //更新各变量
+            low += cur * digit;
+            cur = high % 10;
+            high /= 10;
+            digit *= 10;
+        }
+        return res;
     }
 
     /**
