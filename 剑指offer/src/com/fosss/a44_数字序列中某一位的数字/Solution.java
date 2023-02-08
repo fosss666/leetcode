@@ -12,35 +12,54 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int res = solution.findNthDigit2(11);
+        int res = solution.findNthDigit2(1000000000);
         System.out.println("res = " + res);
     }
 
     /**
      * 找规律题
-     *      数字范围   位数   数字数量   数位数量
-     *       1 - 9      1        9          9
-     *      10 - 99     2        90         180
-     *     100 - 999    3        900        2700
-     *        ...      ...       ...        ...
-     *   start - end   digit    9*start   9*start*dight
+     * 用long，因为int表示的范围不够
+     *
+     * 数字范围   位数   数字数量   数位数量
+     * 1 - 9      1        9          9
+     * 10 - 99     2        90         180
+     * 100 - 999    3        900        2700
+     * ...      ...       ...        ...
+     * start - end   digit    9*start   9*start*dight
      */
     public int findNthDigit2(int n) {
-        //例如求第11个数，即n=11
-        //几位数
+
         int digit = 1;
-        //几位数的第一个数，比如三位数的第一个数是100
-        long start = 1;
-        //几位数一共有多少个数位，比如两位数共有180位（90个数*两位）
         long count = 9;
-        while (n > count) { // 1.  11>9成立
-            n -= count;//n-=9,即n=2
-            digit += 1;//digit=2
-            start *= 10;//start=10
-            count = digit * start * 9;//count=180
+        long start = 1;
+        while (n > count) {
+            n -= count;
+            digit += 1;
+            start *= 10;
+            count = 9 * digit * start;
         }
-        long num = start + (n - 1) / digit; // 2.  num=10+1/2=10
-        return Long.toString(num).charAt((n - 1) % digit) - '0'; // 3.  res=num.charAt(1%2)=0
+        //注意这里用long类型，int表示的范围太小！！！！!!!
+        long num = start + (n - 1) / digit;
+        char c = (num + "").charAt((n - 1) % digit);
+        return Integer.parseInt(c + "");
+
+        ////例如求第11个数，即n=11
+        ////几位数
+        //int digit = 1;
+        ////几位数的第一个数，比如三位数的第一个数是100
+        //long start = 1;
+        ////几位数一共有多少个数位，比如两位数共有180位（90个数*两位）
+        //long count = 9;
+        //while (n > count) { // 1.  11>9成立
+        //    n -= count;//n-=9,即n=2
+        //    digit += 1;//digit=2
+        //    start *= 10;//start=10
+        //    count = digit * start * 9;//count=180
+        //}
+        ////要找的那位在那个数上,注意这里用long类型，int表示的范围太小！！！！！！！
+        //long num = start + (n - 1) / digit; // 2.  num=10+1/2=10
+        ////要找的那一位是这个数的哪一位
+        //return Long.toString(num).charAt((n - 1) % digit) - '0'; // 3.  res=num.charAt(1%2)=0
 
     }
 
@@ -53,7 +72,7 @@ public class Solution {
             sb.append(i);
         }
         String s = sb.toString();
-        return Integer.parseInt(s.charAt(n)+"");
+        return Integer.parseInt(s.charAt(n) + "");
     }
 }
 
