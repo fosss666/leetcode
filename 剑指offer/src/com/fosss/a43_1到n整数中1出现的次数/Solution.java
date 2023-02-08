@@ -19,7 +19,7 @@ public class Solution {
      * k神，分别判断
      */
     public int countDigitOne2(int n) {
-        //dight代表位数
+        //dight代表当前位数
         int digit = 1, res = 0;
         //high代表当前位左边的所有数,low代表当前位右边的所有数
         int high = n / 10, cur = n % 10, low = 0;
