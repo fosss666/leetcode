@@ -18,8 +18,28 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int res = solution.translateNum(12258);
+        int res = solution.translateNum2(12);
         System.out.println("res = " + res);
+    }
+
+    /**
+     * 动态规划2-优化空间及匹配规则判断
+     * 因为动态规划数组中实际上只有两个数的位置有用，所以只要用两个变量就行，可以节省空间
+     */
+    public int translateNum2(int num) {
+        String s = num + "";
+        int a = 1, b = 1;
+        //因为要截取i-2和i-1这两个下标处的数字，而subString这个方法截取的是左闭右开的，所以i<=s.length()
+        for (int i = 2; i <= s.length(); i++) {
+            String substring = s.substring(i - 2, i);
+            //位于0~25之间的数即为符合匹配规则的数！！！！
+            int n = Integer.parseInt(substring);
+            int c = n > 9 && n < 26 ? a + b : a;
+            //更新
+            b = a;
+            a = c;
+        }
+        return a;
     }
 
     /**
