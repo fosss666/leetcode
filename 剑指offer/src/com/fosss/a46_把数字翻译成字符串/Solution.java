@@ -1,4 +1,4 @@
-package com.fosss.a55_把数字翻译成字符串;
+package com.fosss.a46_把数字翻译成字符串;
 
 import java.util.HashMap;
 import java.util.Map;
