@@ -23,6 +23,27 @@ public class Solution {
     }
 
     /**
+     * 动态规划3-数字求余
+     */
+    public int translateNum3(int num) {
+        int a = 1, b = 1;
+        //num的最后一位数
+        int y = num % 10;
+        int x;
+        while (num != 0) {
+            num /= 10;
+            x = num % 10;
+            int n = x * 10 + y;
+            int c = n >= 10 && n <= 25 ? a + b : a;
+            //更新
+            y = x;
+            b = a;
+            a = c;
+        }
+        return a;
+    }
+
+    /**
      * 动态规划2-优化空间及匹配规则判断
      * 因为动态规划数组中实际上只有两个数的位置有用，所以只要用两个变量就行，可以节省空间
      */
