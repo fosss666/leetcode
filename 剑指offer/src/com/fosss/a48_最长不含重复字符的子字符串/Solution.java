@@ -1,9 +1,6 @@
 package com.fosss.a48_最长不含重复字符的子字符串;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author fosss
@@ -19,12 +16,46 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int res = solution.lengthOfLongestSubstring("dvdf");
+        int res = solution.lengthOfLongestSubstring2("aab");
         System.out.println("res = " + res);
     }
 
     /**
-     * 自解，5% 5%
+     * 动态规划
+     * dp[i]表示以字符s[i]结尾的子字符串的长度
+     */
+    public int lengthOfLongestSubstring2(String s) {
+        if (s.length() == 0) {
+            return 0;
+        }
+        //用哈希表判断字符是否出现过（是否重复）
+        Map<Character, Integer> map = new HashMap<>();
+        map.put(s.charAt(0), 0);
+        //创建dp数组,dp[i]表示以字符s[i]结尾的子字符串的长度
+        int[] dp = new int[s.length()];
+        dp[0] = 1;//初始化以第一个字符结尾的子字符串的长度为1
+        //最长子字符串
+        int res = 1;
+        for (int i = 1; i < s.length(); i++) {
+            if (!map.containsKey(s.charAt(i))) {
+                //如果哈希表中字符没有重复，则i处的长度为上一个字符的长度+1
+                dp[i] = dp[i - 1] + 1;
+            } else {
+                //哈希表中有该字符，则根据上一个字符dp[i-1]是否在这两个重复的字符之间的区间 来设置dp[i]的值
+                //i - k <= dp[i - 1]可以画图看出来这个公式表示k在dp[i-1]这个长度的字符串区间外
+                Integer k = map.get(s.charAt(i));
+                dp[i] = i - k <= dp[i - 1] ? i - k : dp[i - 1] + 1;
+            }
+            //更新哈希表
+            map.put(s.charAt(i), i);
+            //更新res
+            res = Math.max(res, dp[i]);
+        }
+        return res;
+    }
+
+    /**
+     * 自解，暴力求解 5% 5%
      */
     public int lengthOfLongestSubstring(String s) {
         int i = 0, j = 0;
