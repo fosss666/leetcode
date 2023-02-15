@@ -17,8 +17,36 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int res = solution.nthUglyNumber(11);
+        int res = solution.nthUglyNumber2(11);
         System.out.println("res = " + res);
+    }
+
+    /**
+     * 自解，整除判断,超时。。。玛德
+     */
+    public int nthUglyNumber2(int n) {
+        if (n <= 6) {
+            return n;
+        }
+        int count = 6;
+        int i = 7;
+        while (count < n) {
+            int temp = i;
+            while (temp % 2 == 0) {
+                temp /= 2;
+            }
+            while (temp % 3 == 0) {
+                temp /= 3;
+            }
+            while (temp % 5 == 0) {
+                temp /= 5;
+            }
+            if (temp == 1) {
+                count++;
+            }
+            i++;
+        }
+        return i - 1;//while中最后i多++了一次，所以要减回来
     }
 
     /**
@@ -51,7 +79,7 @@ public class Solution {
         return num;
     }
 
-    //找到一个数的因子
+    //找到一个数的因子（因子的因子不能是res中的）
     private List<Integer> getFactors(int n) {
         List<Integer> res = new ArrayList<>();
         for (int i = 2; i <= n / 2; i++) {
