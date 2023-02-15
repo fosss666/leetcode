@@ -41,7 +41,7 @@ public class Solution {
                 dp = dp + 1;
             } else {
                 //哈希表中有该字符，则根据上一个字符dp[i-1]是否在这两个重复的字符之间的区间 来设置dp[i]的值
-                //i - k <= dp[i - 1]可以画图看出来这个公式表示k在dp[i-1]这个长度的字符串区间外
+                //i - k <= dp[i - 1]可以画图看出来这个公式表示下标k处的字符在dp[i-1]这个长度的字符串区间外
                 Integer k = map.get(s.charAt(i));
                 dp = i - k <= dp ? i - k : dp + 1;
             }
