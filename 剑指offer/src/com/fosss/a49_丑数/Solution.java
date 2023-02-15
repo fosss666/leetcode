@@ -17,8 +17,35 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int res = solution.nthUglyNumber2(11);
+        int res = solution.nthUglyNumber3(11);
         System.out.println("res = " + res);
+    }
+
+    /**
+     * 动态规划
+     * 丑数的递推性质： 丑数只包含因子 2,3,5 ，因此有 “丑数 = 某较小丑数× 某因子” （例如：10=5×2）
+     */
+    public int nthUglyNumber3(int n) {
+        int a = 0, b = 0, c = 0;
+        //dp[i]表示第（i-1）个丑数
+        int[] dp = new int[n];
+        dp[0] = 1;
+        for (int i = 1; i < n; i++) {
+            //“丑数 = 某较小丑数× 某因子"
+            //最小的那个即为下一位丑数
+            dp[i] = Math.min(Math.min(dp[a] * 2, dp[b] * 3), dp[c] * 5);
+            //判断a,b,c数进行了上面的处理
+            if (dp[i] == dp[a] * 2) {
+                a++;
+            }
+            if (dp[i] == dp[b] * 3) {
+                b++;
+            }
+            if (dp[i] == dp[c] * 5) {
+                c++;
+            }
+        }
+        return dp[n - 1];
     }
 
     /**
