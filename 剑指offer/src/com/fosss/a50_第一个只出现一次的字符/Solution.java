@@ -16,8 +16,38 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        char res = solution.firstUniqChar2("aadadaad");
+        char res = solution.firstUniqChar3("leetcode");
         System.out.println("res = " + res);
+    }
+
+    /**
+     * 自解，HashMap, 46%  45%
+     * 注意，hashMap存入的键也不是有序存入的
+     */
+    public char firstUniqChar3(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        //hashMap存入的键也不是有序存入的，用i来找到第一个符合条件的值
+        int i = 0;
+        for (char c : s.toCharArray()) {
+            if (map.containsKey(c)) {
+                //值为-1代表是重复字符
+                map.put(c, -1);
+            } else {
+                //值为0代表不是重复字符
+                map.put(c, i);
+                i++;
+            }
+        }
+        //返回第一个符合条件的字符,值最小的且不为-1的即为所需值
+        int min = Integer.MAX_VALUE;
+        Character res = ' ';
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            if (entry.getValue() < min && entry.getValue() != -1) {
+                min = entry.getValue();
+                res = entry.getKey();
+            }
+        }
+        return res;
     }
 
     /**
