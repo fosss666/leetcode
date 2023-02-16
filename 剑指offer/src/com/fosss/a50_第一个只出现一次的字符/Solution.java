@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  * @description： 在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母
  * 例：输入：s = "abaccdeff"  输出：'b'
  * 限制：0 <= s 的长度 <= 50000
- * 提示：这种是否重复的问题，可以考虑哈希表或LinkedHashSet(HashSet存入的值是无序的，无法获取第一个符合条件的字符)
+ * 提示：这种是否重复的问题，可以考虑哈希表（HashMap是无序的）或LinkedHashSet
  */
 public class Solution {
 
@@ -24,30 +24,60 @@ public class Solution {
      * 自解，HashMap, 46%  45%
      * 注意，hashMap存入的键也不是有序存入的
      */
+    //public char firstUniqChar4(String s) {
+    //
+    //}
+
+    /**
+     * 自解，HashMap, 46%  45%
+     * 注意，hashMap存入的键也不是有序存入的
+     * LinkedHashMap 62%  66%
+     */
     public char firstUniqChar3(String s) {
-        Map<Character, Integer> map = new HashMap<>();
-        //hashMap存入的键也不是有序存入的，用i来找到第一个符合条件的值
-        int i = 0;
+
+        //LinkedHashMap是有序的，不用再多余去寻找第一个符合条件的值了
+        Map<Character, Integer> map = new LinkedHashMap<>();
+        //hashMap
         for (char c : s.toCharArray()) {
             if (map.containsKey(c)) {
                 //值为-1代表是重复字符
                 map.put(c, -1);
             } else {
                 //值为0代表不是重复字符
-                map.put(c, i);
-                i++;
+                map.put(c, 0);
             }
         }
         //返回第一个符合条件的字符,值最小的且不为-1的即为所需值
-        int min = Integer.MAX_VALUE;
-        Character res = ' ';
         for (Map.Entry<Character, Integer> entry : map.entrySet()) {
-            if (entry.getValue() < min && entry.getValue() != -1) {
-                min = entry.getValue();
-                res = entry.getKey();
+            if (entry.getValue() == 0) {
+                return entry.getKey();
             }
         }
-        return res;
+        return ' ';
+
+        //Map<Character, Integer> map = new HashMap<>();
+        ////hashMap存入的键也不是有序存入的，用i来找到第一个符合条件的值
+        //int i = 0;
+        //for (char c : s.toCharArray()) {
+        //    if (map.containsKey(c)) {
+        //        //值为-1代表是重复字符
+        //        map.put(c, -1);
+        //    } else {
+        //        //值不为-1代表不是重复字符
+        //        map.put(c, i);
+        //        i++;
+        //    }
+        //}
+        ////返回第一个符合条件的字符,值最小的且不为-1的即为所需值
+        //int min = Integer.MAX_VALUE;
+        //Character res = ' ';
+        //for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+        //    if (entry.getValue() < min && entry.getValue() != -1) {
+        //        min = entry.getValue();
+        //        res = entry.getKey();
+        //    }
+        //}
+        //return res;
     }
 
     /**
