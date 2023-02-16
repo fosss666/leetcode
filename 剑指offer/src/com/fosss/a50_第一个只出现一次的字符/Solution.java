@@ -1,10 +1,7 @@
 package com.fosss.a50_第一个只出现一次的字符;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -13,13 +10,35 @@ import java.util.stream.Collectors;
  * @description： 在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母
  * 例：输入：s = "abaccdeff"  输出：'b'
  * 限制：0 <= s 的长度 <= 50000
+ * 提示：这种是否重复的问题，可以考虑哈希表或LinkedHashSet(HashSet存入的值是无序的，无法获取第一个符合条件的字符)
  */
 public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        char res = solution.firstUniqChar("loveleetcode");
+        char res = solution.firstUniqChar2("aadadaad");
         System.out.println("res = " + res);
+    }
+
+    /**
+     * 自解，LinkedHashSet, 5%  84%
+     */
+    public char firstUniqChar2(String s) {
+        Set<Character> set = new LinkedHashSet<>();
+        //用来保存已经重复的字符
+        List<Character> list = new ArrayList<>();
+        for (char c : s.toCharArray()) {
+            if (set.contains(c) || list.contains(c)) {
+                set.remove(c);
+                if (!list.contains(c)) {
+                    list.add(c);
+                }
+            } else {
+                set.add(c);
+            }
+        }
+        return set.isEmpty() ? ' ' : (char) set.toArray()[0];
+
     }
 
     /**
