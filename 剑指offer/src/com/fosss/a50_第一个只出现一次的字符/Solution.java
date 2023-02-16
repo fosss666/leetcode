@@ -21,12 +21,30 @@ public class Solution {
     }
 
     /**
-     * 自解，HashMap, 46%  45%
-     * 注意，hashMap存入的键也不是有序存入的
+     * 大佬map的值用布尔类型-很简洁
      */
-    //public char firstUniqChar4(String s) {
-    //
-    //}
+    public char firstUniqChar4(String s) {
+        //LinkedHashMap
+        Map<Character, Boolean> dic = new LinkedHashMap<>();
+        char[] sc = s.toCharArray();
+        for(char c : sc)
+            dic.put(c, !dic.containsKey(c));
+        for(Map.Entry<Character, Boolean> d : dic.entrySet()){
+            if(d.getValue()) return d.getKey();
+        }
+        return ' ';
+
+        //====HashMap=====
+        //HashMap<Character, Boolean> dic = new HashMap<>();
+        ////用一个数组保证返回时返回第一个值
+        //char[] sc = s.toCharArray();
+        //for(char c : sc)
+        //    dic.put(c, !dic.containsKey(c));
+        //for(char c : sc)
+        //    if(dic.get(c)) return c;
+        //return ' ';
+
+    }
 
     /**
      * 自解，HashMap, 46%  45%
