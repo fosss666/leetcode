@@ -40,6 +40,7 @@ public class Solution {
         //char[] sc = s.toCharArray();
         //for(char c : sc)
         //    dic.put(c, !dic.containsKey(c));
+        ////遍历数组,HashMap虽然是无序的，但是数组是有序的，map只用来取值就行了
         //for(char c : sc)
         //    if(dic.get(c)) return c;
         //return ' ';
