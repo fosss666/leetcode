@@ -15,6 +15,20 @@ import java.util.*;
  */
 public class Solution {
 
+    /**
+     * 双指针，浪漫相遇
+     * https://leetcode.cn/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-dian-lcof/solution/jian-zhi-offer-52-liang-ge-lian-biao-de-gcruu/
+     */
+    ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
+        ListNode tA = headA;
+        ListNode tB = headB;
+        //双指针，一个指针遍历完A链表后再去遍历B链表，一个指针遍历完B后再去遍历A,当这两个指针所指向的结点相同时，即找到第一个共同节点
+        while (tA != tB) {
+            tA = tA == null ? headB : tA.next;
+            tB = tB == null ? headA : tB.next;
+        }
+        return tA;
+    }
 
     /**
      * 自解,LinkedHashMap  5.99% 5.06%
