@@ -64,7 +64,7 @@ public class Solution {
         while (j <= r2) {
             temp[t++] = nums[j++];
         }
-        //复制到原数组
+        //复制到原数组的对应位置
         t = 0;
         while (l1 <= r2) {
             nums[l1++] = temp[t++];
