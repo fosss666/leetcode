@@ -14,9 +14,29 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int[] nums = {0};
-        int res = solution.missingNumber(nums);
+        int[] nums = {1, 2, 3};
+        int res = solution.missingNumber2(nums);
         System.out.println("res = " + res);
+    }
+
+    /**
+     * 二分法
+     * 数组是升序的，所以一个下标处没有问题的话，证明他左边的元素也没有问题，根据这个
+     * 左子数组是符合规则的，右子树组是不符合规则的， 跳出时，变量 left 和 right 分别指向 “右子数组的首位元素” 和 “左子数组的末位元素” 。因此
+     * 返回 left 即可
+     */
+    public int missingNumber2(int[] nums) {
+        int left = 0, right = nums.length - 1;
+        while (left <= right) {
+            int mid = (right - left) / 2 + left;
+            if (nums[mid] == mid) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+
+        }
+        return left;
     }
 
     /**
@@ -31,7 +51,7 @@ public class Solution {
             i++;
         }
         //例如：长度为2的数组，元素应为【0，1】，所以他不包含0~2中的2
-        if(i==nums.length){
+        if (i == nums.length) {
             return i;
         }
         return -1;
