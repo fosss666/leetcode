@@ -23,8 +23,36 @@ public class Solution {
         node1.right = node3;
 
         Solution solution = new Solution();
-        int res = solution.kthLargest(node1, 3);
+        int res = solution.kthLargest2(node1, 3);
         System.out.println("res = " + res);
+    }
+
+    /**
+     * 中序遍历，优化  100%
+     * 二叉搜索树按照右结点->根节点->左结点的顺序遍历就是从大到小遍历
+     */
+    public int kthLargest2(TreeNode root, int k) {
+        if (root == null) {
+            return -1;
+        }
+        middle2(root,k);
+        return res;
+    }
+
+    int num=0,res=-1;
+    private void middle2(TreeNode root, int k) {
+        if (root.right != null) {
+            middle2(root.right, k);
+        }
+        //++num 把这个条件放到括号里是关键
+        if(++num==k){
+            res=root.val;
+            return;
+        }
+
+        if (root.left != null) {
+            middle2(root.left, k);
+        }
     }
 
 
@@ -38,12 +66,14 @@ public class Solution {
         List<Integer> list = new ArrayList<>();
         middle(root, list);
         //第k大，就是正数第（n-k）个数
-        for (int i = 0; i < list.size(); i++) {
+        return list.get(list.size()-k);
+
+        /*for (int i = 0; i < list.size(); i++) {
             if (list.size() - k == i) {
                 return list.get(i);
             }
         }
-        return -1;
+        return -1;*/
     }
 
     private void middle(TreeNode root, List<Integer> list) {
