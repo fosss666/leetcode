@@ -1,8 +1,8 @@
 package com.fosss.a55_1_二叉树的深度;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import sun.reflect.generics.tree.Tree;
+
+import java.util.*;
 
 /**
  * @author fosss
@@ -25,8 +25,35 @@ public class Solution {
         node3.right = node5;
 
         Solution solution = new Solution();
-        int res = solution.maxDepth2(node1);
+        int res = solution.maxDepth3(node1);
         System.out.println("res = " + res);
+    }
+
+    /**
+     * 广度优先/层序遍历，使用队列  19.38%  84.95%
+     */
+    public int maxDepth3(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int maxDepth = 0;
+        while (queue.size() > 0) {
+            maxDepth++;
+            //注意一定要把此时此刻队列的大小提前定义出来！！！，因为在for循环中，队列会出入，队列大小会发生变化
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode poll = queue.poll();
+                if (poll.left != null) {
+                    queue.add(poll.left);
+                }
+                if (poll.right != null) {
+                    queue.add(poll.right);
+                }
+            }
+        }
+        return maxDepth;
     }
 
     /**
