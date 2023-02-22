@@ -25,10 +25,23 @@ public class Solution {
         node3.right = node5;
 
         Solution solution = new Solution();
-        int res = solution.maxDepth(node1);
+        int res = solution.maxDepth2(node1);
         System.out.println("res = " + res);
     }
 
+    /**
+     * 深度优先/后序遍历  100%  52.25%
+     */
+    public int maxDepth2(TreeNode root) {
+
+        return root == null ? 0 : Math.max(maxDepth2(root.left), maxDepth2(root.right)) + 1;
+
+/*        if (root == null) {
+            return 0;
+        }
+        //树的最大深度=左子树和右子树的最大深度+1
+        return Math.max(maxDepth2(root.left), maxDepth2(root.right)) + 1;*/
+    }
 
     /**
      * 自解， 集合记录深度 19.38%  97.51%
@@ -54,6 +67,7 @@ public class Solution {
         if (root.left != null) {
             count++;
             getMaxDepth(root.left, list);
+            //递归结束要将count复原！
             count--;
         }
         if (root.right != null) {
