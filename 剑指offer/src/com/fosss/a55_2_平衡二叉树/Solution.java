@@ -26,7 +26,7 @@ public class Solution {
     }
 
     /**
-     * k神，后序遍历+剪枝（从底至顶）
+     * k神，后序遍历+剪枝（从底至顶）  100%  61%
      */
     public boolean isBalanced2(TreeNode root) {
         return dfs(root) != -1;
