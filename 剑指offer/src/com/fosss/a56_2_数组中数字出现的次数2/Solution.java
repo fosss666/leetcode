@@ -1,5 +1,6 @@
 package com.fosss.a56_2_数组中数字出现的次数2;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +16,27 @@ public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
         int[] nums = {3, 4, 3, 3};
-        int res = solution.singleNumber(nums);
+        int res = solution.singleNumber2(nums);
         System.out.println("res = " + res);
+    }
+
+    /**
+     * 自解，先排序后判断  47%  61%
+     */
+    public int singleNumber2(int[] nums) {
+        Arrays.sort(nums);
+        int i = 0, j = 1;
+
+        while (i < nums.length && j < nums.length) {
+            if (nums[i] == nums[j]) {
+                i += 3;
+                j = i + 1;
+            } else {
+                return nums[i];
+            }
+        }
+        //循环走完说明符合条件的值是数组的最后一个元素，返回最后一个元素
+        return nums[nums.length - 1];
     }
 
     /**
