@@ -1,4 +1,4 @@
-package com.fosss.a57_和为s的两个数字;
+package com.fosss.a57_1_和为s的两个数字;
 
 import java.util.Arrays;
 import java.util.HashSet;
