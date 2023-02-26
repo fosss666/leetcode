@@ -16,8 +16,25 @@ public class Solution {
     public static void main(String[] args) {
         int[] nums = {2, 3, 9, 41, 46, 47};
         Solution solution = new Solution();
-        int[] res = solution.twoSum2(nums, 49);
+        int[] res = solution.twoSum3(nums, 49);
         System.out.println("res = " + Arrays.toString(res));
+    }
+
+    /**
+     * 双指针  48%  41%
+     */
+    public int[] twoSum3(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            if (nums[left] + nums[right] == target) {
+                return new int[]{nums[left], nums[right]};
+            } else if (nums[left] + nums[right] > target) {
+                right--;
+            } else {
+                left++;
+            }
+        }
+        return new int[]{};
     }
 
     /**
