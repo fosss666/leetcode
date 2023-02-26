@@ -1,6 +1,8 @@
 package com.fosss.a57_和为s的两个数字;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author fosss
@@ -12,10 +14,25 @@ import java.util.Arrays;
 public class Solution {
 
     public static void main(String[] args) {
-        int[] nums = {2, 7, 11, 15};
+        int[] nums = {2, 3, 9, 41, 46, 47};
         Solution solution = new Solution();
-        int[] res = solution.twoSum(nums, 9);
+        int[] res = solution.twoSum2(nums, 49);
         System.out.println("res = " + Arrays.toString(res));
+    }
+
+    /**
+     * set  11%  91%
+     */
+    public int[] twoSum2(int[] nums, int target) {
+        Set<Integer> set = new HashSet<>();
+        for (int num : nums) {
+            if (!set.contains(target - num)) {
+                set.add(num);
+            } else {
+                return new int[]{num, target - num};
+            }
+        }
+        return new int[]{};
     }
 
     /**
@@ -26,7 +43,7 @@ public class Solution {
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] <= target) {
                 for (int j = i + 1; j < nums.length; j++) {
-                    if(nums[j]+nums[i]>target){
+                    if (nums[j] + nums[i] > target) {
                         break;
                     }
                     if (nums[i] + nums[j] == target) {
