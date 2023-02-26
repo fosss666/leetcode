@@ -26,6 +26,9 @@ public class Solution {
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] <= target) {
                 for (int j = i + 1; j < nums.length; j++) {
+                    if(nums[j]+nums[i]>target){
+                        break;
+                    }
                     if (nums[i] + nums[j] == target) {
                         res[0] = nums[i];
                         res[1] = nums[j];
