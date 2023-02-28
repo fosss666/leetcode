@@ -20,12 +20,30 @@ public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
         String s = "II  am a student. ";
-        String res = solution.reverseWords2(s);
+        String res = solution.reverseWords4(s);
 
         System.out.println("res = " + res);
         System.out.println(s.length());
         System.out.println(res.length());
 
+    }
+
+    /**
+     * 分割+倒序   100%  63%
+     */
+    public String reverseWords4(String s) {
+        s = s.trim();
+        StringBuilder sb = new StringBuilder();
+        //按照空格分割
+        String[] arr = s.split(" ");
+        for (int i = arr.length - 1; i >= 0; i--) {
+            //多个连续空格以空格分割的话会形成空字符串，所以要跳过
+            if (arr[i].equals("")) {
+                continue;
+            }
+            sb.append(arr[i]).append(' ');
+        }
+        return sb.toString().trim();
     }
 
     /**
