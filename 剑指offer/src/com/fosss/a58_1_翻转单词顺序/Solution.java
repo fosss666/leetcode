@@ -1,5 +1,8 @@
 package com.fosss.a58_1_翻转单词顺序;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author: fosss
  * Date: 2023/2/28
@@ -16,16 +19,54 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        String s = "II am a student. ";
-        String res = solution.reverseWords(s);
+        String s = "II  am a student. ";
+        String res = solution.reverseWords2(s);
+
         System.out.println("res = " + res);
         System.out.println(s.length());
         System.out.println(res.length());
+
     }
 
 
     /**
-     * 自解，用StringBuilder拼接字符串  76%  53%
+     * 自解，List记录单词再反转  35%  88%
+     */
+    public String reverseWords2(String s) {
+        s = s.trim();
+        List<String> list = new ArrayList<>();
+        int i = 0, j = 0;
+        while (j < s.length()) {
+            if (s.charAt(j) == ' ' || j == s.length() - 1) {
+                if (j == s.length() - 1) {
+                    //substring是左开右闭的，j++才能添加到最后一个元素
+                    j++;
+                }
+                list.add(s.substring(i, j));
+                //更新i
+                i = j + 1;
+                //防止两个单词之间有多个空格
+                while (i<s.length()&&s.charAt(i) == ' ') {
+                    i++;
+                    //同步更新j
+                    j++;
+                }
+
+            }
+            //更新j
+            j++;
+        }
+        StringBuffer sb = new StringBuffer();
+        //倒叙拼接
+        for (int k = list.size() - 1; k >= 0; k--) {
+            sb.append(k == 0 ? list.get(k) : list.get(k) + " ");
+        }
+        return sb.toString();
+    }
+
+
+    /**
+     * 自解，用StringBuilder拼接字符串  76%  54%
      */
     public String reverseWords(String s) {
         //先去除字符串两端空格
@@ -49,7 +90,7 @@ public class Solution {
         }
         //添加上最后一个单词
         newS.append(s, 0, k);
-        return newS.toString().trim();
+        return newS.toString();
     }
 }
 
