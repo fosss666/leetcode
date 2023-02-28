@@ -28,6 +28,28 @@ public class Solution {
 
     }
 
+    /**
+     * 双指针法  76%  86%
+     */
+    public String reverseWords3(String s) {
+        s = s.trim();
+        StringBuffer sb = new StringBuffer();
+        int i = s.length() - 1, j = s.length() - 1;
+        while (i >= 0) {
+            //查找第一个空格
+            while (i >= 0 && s.charAt(i) != ' ') {
+                i--;
+            }
+            sb.append(s, i + 1, j + 1).append(" ");
+            //去除空格间的多个空格
+            while (i >= 0 && s.charAt(i) == ' ') {
+                i--;
+            }
+            j = i;
+        }
+
+        return sb.toString().trim();
+    }
 
     /**
      * 自解，List记录单词再反转  35%  88%
@@ -46,7 +68,7 @@ public class Solution {
                 //更新i
                 i = j + 1;
                 //防止两个单词之间有多个空格
-                while (i<s.length()&&s.charAt(i) == ' ') {
+                while (i < s.length() && s.charAt(i) == ' ') {
                     i++;
                     //同步更新j
                     j++;
