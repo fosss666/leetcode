@@ -23,19 +23,25 @@ public class Solution {
         System.out.println(res.length());
     }
 
+
     /**
-     * 自解，用StringBuilder拼接字符串，超出内存限制
+     * 自解，用StringBuilder拼接字符串  76%  53%
      */
     public String reverseWords(String s) {
+        //先去除字符串两端空格
+        s = s.trim();
+        //使用StringBuilder拼接字符串
         StringBuilder newS = new StringBuilder();
         int k = s.length();
         for (int i = s.length() - 1; i >= 0; i--) {
             if (s.charAt(i) == ' ') {
                 //防止两个单词之间有多个空格
-                while (s.charAt(i) == ' ') {
-                    i++;
+                if (s.charAt(i + 1) == ' ') {
+                    //有多个空格，则进入下一个循环，此时相当于i--,则同时对应应该更新k,才能截取正确的单词
+                    k--;
+                    continue;
                 }
-                String substring = s.substring(i, k);
+                String substring = s.substring(i + 1, k);
                 newS.append(substring).append(' ');
                 //更新k
                 k = i;
