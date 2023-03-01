@@ -1,6 +1,6 @@
 package com.fosss.a59_滑动窗口的最大值;
 
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * @author: fosss
@@ -26,9 +26,45 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int[] nums = {1, -1};
-        int[] res = solution.maxSlidingWindow(nums, 1);
+        int[] nums = {1, 3, 1, 2, 0, 5};
+        int[] res = solution.maxSlidingWindow2(nums, 3);
         System.out.println("res = " + Arrays.toString(res));
+    }
+
+    /**
+     * 队列LinkedList   33%   28%
+     */
+    public int[] maxSlidingWindow2(int[] nums, int k) {
+        if (nums.length == 0 || k == 0) {
+            return nums;
+        }
+        int[] res = new int[nums.length - k + 1];
+        int m = 0;
+        //队列中存放下标，目的是判断队头是否再窗口内
+        LinkedList<Integer> queue = new LinkedList<>();
+        //遍历数组
+        for (int i = 0; i < nums.length; i++) {
+            //判断队尾和新元素的大小，如果比新元素小，则将队尾一直出队列
+            while (!queue.isEmpty() && nums[queue.peekLast()] < nums[i]) {
+                queue.pollLast();
+            }
+            //新元素入队
+            queue.add(i);
+
+            //队头是最大值的下标，需要先判断队头是否在窗口内  这里是关键！！  i- queue.peek()>=k
+            if (i - queue.peek() >= k) {
+                //说明队头不在窗口内，则先将其剔除
+                queue.poll();
+            }
+
+            //此时队头就是窗口最大元素的下标了
+            //注意i要大于等于k-1后才开始添加结果值
+            if (i >= k - 1) {
+                res[m++] = nums[queue.peek()];
+            }
+        }
+
+        return res;
     }
 
     /**
