@@ -19,12 +19,13 @@ public class Solution {
     }
 
     /**
-     * 自解，直接截取拼接 100%  42%
+     * 自解，直接截取拼接 100%  47%
      */
     public String reverseLeftWords3(String s, int n) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(s, 0, n);
-        return s.substring(n) + sb;
+        return s.substring(n) + s.substring(0, n);
+        //StringBuilder sb = new StringBuilder();
+        //sb.append(s, 0, n);
+        //return s.substring(n) + sb;
     }
 
     /**
