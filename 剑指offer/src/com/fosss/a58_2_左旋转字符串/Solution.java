@@ -14,10 +14,18 @@ public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
 
-        String res = solution.reverseLeftWords2("abcdefg", 2);
+        String res = solution.reverseLeftWords3("abcdefg", 2);
         System.out.println("res = " + res);
     }
 
+    /**
+     * 自解，直接截取拼接 100%  42%
+     */
+    public String reverseLeftWords3(String s, int n) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(s, 0, n);
+        return s.substring(n) + sb;
+    }
 
     /**
      * 自解，不利用StringBuilder拼接字符串  5%  5%
