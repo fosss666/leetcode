@@ -26,13 +26,43 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int[] nums = {1, 3, 1, 2, 0, 5};
-        int[] res = solution.maxSlidingWindow2(nums, 3);
+        int[] nums = {-6,-10,-7,-1,-9,9,-8,-4,10,-5,2,9,0,-7,7,4,-2,-10,8,7};
+        int[] res = solution.maxSlidingWindow2(nums, 7);
         System.out.println("res = " + Arrays.toString(res));
     }
 
     /**
-     * 队列LinkedList   33%   28%
+     * 大顶堆+map  不能解决数组中出现重复数字的情况，小丑
+     */
+    public int[] maxSlidingWindow3(int[] nums, int k) {
+        int[] res = new int[nums.length - k + 1];
+        int index = 0;
+        //大顶堆-由大到小
+        PriorityQueue<Integer> queue = new PriorityQueue<Integer>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2 - o1;
+            }
+        });
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i]+i, i);
+        }
+        for (int i = 0; i < nums.length; i++) {
+            //判断队头是不是在窗口内，不在的话就弹出
+            while (queue.size() > 0 && map.get(nums[i]) - map.get(queue.peek()) >= k) {
+                queue.poll();
+            }
+            queue.add(nums[i]);
+            if (i >= k - 1) {
+                res[index++] = queue.peek();
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 队列LinkedList   93%   35%
      */
     public int[] maxSlidingWindow2(int[] nums, int k) {
         if (nums.length == 0 || k == 0) {
