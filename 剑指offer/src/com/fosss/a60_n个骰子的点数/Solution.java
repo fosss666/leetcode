@@ -17,8 +17,49 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        double[] res = solution.dicesProbability(2);
+        double[] res = solution.dicesProbability2(2);
         System.out.println("res = " + Arrays.toString(res));
+    }
+
+    /**
+     * 空间优化-一维数组动态规划   100%  96%
+     */
+    public double[] dicesProbability2(int n) {
+        double[] res = new double[6 * n - n + 1];
+        //dp[i]表示和为i时的组合数，初始创建大小为7的数组，因为一个骰子的最大值为6
+        double[] dp = new double[7];//
+        //初始化只有一个骰子的时候的的情况
+        for (int i = 1; i <= 6; i++) {
+            //每种结果只有一种可能组合
+            dp[i] = 1;
+        }
+        //处理多个骰子的情况,从第二个骰子开始
+        for (int i = 2; i <= n; i++) {
+            double[] tmp = new double[i * 6 + 1];//i个骰子时，最大和为6*i
+            //这些骰子值的和的可能值
+            for (int j = i; j <= 6 * i; j++) {
+                //每个骰子有6种可能值,i-k==>因为第i个骰子可能值为1~6，所以第i-1个骰子的和为第i个骰子的和减去k(1<=k<=6)
+                for (int k = 1; k <= 6; k++) {
+                    if (j - k < 1) {
+                        break;
+                    }
+                    if (j - k >= dp.length) {
+                        continue;
+                    }
+                    //第i个骰子的可能和的组合数为第i-1个骰子的和！！！！！
+                    tmp[j] += dp[j - k];
+                }
+            }
+            //将tmp赋给dp
+            dp = tmp;
+        }
+        //以上得到了所有可能和的组合
+        //所有可能情况为6^n
+        //求概率  每种可能和的组合数/总数
+        for (int i = n; i <= 6 * n; i++) {
+            res[i - n] = dp[i] / (Math.pow(6, n));
+        }
+        return res;
     }
 
     /**
@@ -36,7 +77,7 @@ public class Solution {
         //处理多个骰子的情况,从第二个骰子开始
         for (int i = 2; i <= n; i++) {
             //这些骰子值的和的可能值
-            for (int j = i; j <= 6 * n; j++) {
+            for (int j = i; j <= 6 * i; j++) {
                 //每个骰子有6种可能值,i-k==>因为第i个骰子可能值为1~6，所以第i-1个骰子的和为第i个骰子的和减去k(1<=k<=6)
                 for (int k = 1; k <= 6; k++) {
                     if (j - k < 1) {
