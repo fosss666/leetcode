@@ -16,10 +16,28 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int res = solution.lastRemaining(5, 2);
+        int res = solution.lastRemaining2(5, 2);
         System.out.println("res = " + res);
     }
 
+    /**
+     *  优化List    5%   12%
+     */
+    public int lastRemaining2(int n, int m) {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            list.add(i);
+        }
+        int index = 0;
+        //n表示集合元素的个数
+        while (n>1) {
+            //更新要删除的元素的下标(index+m-1)，%n是因为index+m-1可能大于n
+            index=(index+m-1)%n;
+            list.remove(index);
+            n--;
+        }
+        return list.get(0);
+    }
 
     /**
      * 自解，List集合，超时-_-!
