@@ -16,12 +16,30 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int res = solution.lastRemaining2(5, 2);
+        int res = solution.lastRemaining4(5, 3);
         System.out.println("res = " + res);
     }
 
+
+
     /**
-     *  优化List    5%   12%
+     * 自解，字符串拼接   超时-_-!
+     */
+    public int lastRemaining4(int n, int m) {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            s.append(i);
+        }
+        while (s.length() > 1) {
+            s.deleteCharAt((m - 1) % s.length());
+            s.append(s.substring(0, (m-1) % s.length()));
+            s.delete(0,(m-1) % s.length());
+        }
+        return Integer.parseInt(s.toString());
+    }
+
+    /**
+     * 优化List    5%   12%
      */
     public int lastRemaining2(int n, int m) {
         List<Integer> list = new ArrayList<>();
@@ -30,9 +48,9 @@ public class Solution {
         }
         int index = 0;
         //n表示集合元素的个数
-        while (n>1) {
+        while (n > 1) {
             //更新要删除的元素的下标(index+m-1)，%n是因为index+m-1可能大于n
-            index=(index+m-1)%n;
+            index = (index + m - 1) % n;
             list.remove(index);
             n--;
         }
