@@ -16,11 +16,22 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int res = solution.lastRemaining4(5, 3);
+        int res = solution.lastRemaining3(5, 3);
         System.out.println("res = " + res);
     }
 
-
+    /**
+     * 数学解法  动态规划思想
+     * https://leetcode.cn/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/solution/javajie-jue-yue-se-fu-huan-wen-ti-gao-su-ni-wei-sh/
+     * (当前index + m) % 上一轮剩余数字的个数
+     */
+    public int lastRemaining3(int n, int m) {
+        int x = 0;
+        for (int i = 2; i <= n; i++) {
+            x = (x + m) % i;
+        }
+        return x;
+    }
 
     /**
      * 自解，字符串拼接   超时-_-!
@@ -32,8 +43,8 @@ public class Solution {
         }
         while (s.length() > 1) {
             s.deleteCharAt((m - 1) % s.length());
-            s.append(s.substring(0, (m-1) % s.length()));
-            s.delete(0,(m-1) % s.length());
+            s.append(s.substring(0, (m - 1) % s.length()));
+            s.delete(0, (m - 1) % s.length());
         }
         return Integer.parseInt(s.toString());
     }
