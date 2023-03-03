@@ -22,7 +22,7 @@ public class Solution {
     }
 
     /**
-     * k神-更加优雅的一维数组动态规划
+     * k神-更加优雅的一维数组动态规划     100%   59%
      */
     public double[] dicesProbability3(int n) {
         //因为最后的结果只与前一个动态转移数组有关，所以这里只需要设置一个一维的动态转移数组
@@ -54,7 +54,7 @@ public class Solution {
     }
 
     /**
-     * 空间优化-一维数组动态规划   100%  96%
+     * 空间优化-一维数组动态规划   100%  50%
      */
     public double[] dicesProbability2(int n) {
         double[] res = new double[6 * n - n + 1];
@@ -95,7 +95,7 @@ public class Solution {
     }
 
     /**
-     * 二维数组动态规划   100%  92%
+     * 二维数组动态规划   100%  35%
      */
     public double[] dicesProbability(int n) {
         double[] res = new double[6 * n - n + 1];
@@ -110,7 +110,7 @@ public class Solution {
         for (int i = 2; i <= n; i++) {
             //这些骰子值的和的可能值
             for (int j = i; j <= 6 * i; j++) {
-                //每个骰子有6种可能值,i-k==>因为第i个骰子可能值为1~6，所以第i-1个骰子的和为第i个骰子的和减去k(1<=k<=6)
+                //每个骰子有6种可能值,j-k==>因为第i个骰子可能值为1~6，所以第i-1个骰子的和为第i个骰子的和减去k(1<=k<=6)
                 for (int k = 1; k <= 6; k++) {
                     if (j - k < 1) {
                         break;
