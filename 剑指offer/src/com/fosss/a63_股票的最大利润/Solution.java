@@ -25,6 +25,21 @@ public class Solution {
     }
 
     /**
+     * 动态规划,原理也是找最小值和最大的差   52%  41%
+     */
+    public int maxProfit2(int[] prices) {
+        if (prices.length < 2) {
+            return 0;
+        }
+        int min = prices[0], max = 0;
+        for (int i = 1; i < prices.length; i++) {
+            min = Math.min(min, prices[i]);
+            max = Math.max(max, prices[i] - min);
+        }
+        return max;
+    }
+
+    /**
      * 自解，固定最小值找差最大  52%  69%
      */
     public int maxProfit(int[] prices) {
