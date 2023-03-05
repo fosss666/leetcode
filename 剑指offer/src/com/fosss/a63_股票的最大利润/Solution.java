@@ -55,7 +55,7 @@ public class Solution {
                 i = j;
                 j++;
             }
-            //更新max
+            //更新max  prices[i]是当前的最小值
             if (j < prices.length && prices[j] - prices[i] > max) {
                 max = prices[j] - prices[i];
             }
