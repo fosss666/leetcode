@@ -37,6 +37,33 @@ public class Solution {
     }
 
     /**
+     * 迭代，提前判断pq的大小,从而简化后边的if判断        100%   42%
+     * 利用二叉搜索树的性质
+     */
+    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+        //使p为较小的那个
+        if (p.val > q.val) {
+            TreeNode tmp = p;
+            p = q;
+            q = tmp;
+        }
+        while (root != null) {
+            //q比p的值大，所以q.val<root.val,则一定p.val<root.val
+            if (q.val < root.val) {
+                //p和q都在公共祖先的左子树
+                root = root.left;
+            } else if (p.val > root.val) {
+                //p和q都在公共祖先的右子树
+                root = root.right;
+            } else {
+                //p和q再公共祖先的左右子树，此时的公共祖先是最近的
+                break;
+            }
+        }
+        return root;
+    }
+
+    /**
      * 迭代         100%   10%
      * 利用二叉搜索树的性质
      */
