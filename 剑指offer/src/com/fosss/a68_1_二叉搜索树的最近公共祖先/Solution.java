@@ -37,6 +37,20 @@ public class Solution {
     }
 
     /**
+     * 递归         100%  41%
+     * 利用二叉搜索树的性质
+     */
+    public TreeNode lowestCommonAncestor3(TreeNode root, TreeNode p, TreeNode q) {
+        if (p.val < root.val && q.val < root.val) {
+            //向左子树递归
+            return lowestCommonAncestor3(root.left, p, q);
+        } else if (p.val > root.val && q.val > root.val) {
+            return lowestCommonAncestor3(root.right, p, q);
+        }
+        return root;
+    }
+
+    /**
      * 迭代，提前判断pq的大小,从而简化后边的if判断        100%   42%
      * 利用二叉搜索树的性质
      */
