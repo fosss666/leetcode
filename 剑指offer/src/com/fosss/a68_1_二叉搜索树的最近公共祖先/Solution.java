@@ -37,6 +37,41 @@ public class Solution {
     }
 
     /**
+     * 深度优先搜索    41%  43%
+     */
+    public TreeNode lowestCommonAncestor4(TreeNode root, TreeNode p, TreeNode q) {
+        //递归退出条件
+        if (root == null) {
+            return null;
+        }
+        if (root == p) {
+            //p为公共祖先
+            return p;
+        }
+        if (root == q) {
+            //q为公共祖先
+            return q;
+        }
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        //结果分为四种可能
+        //1.如果都不为空，说明公共祖先为root
+        if (left != null && right != null) {
+            return root;
+        }
+        //2.如果left不为空，说明公共祖先为left
+        if (left != null) {
+            return left;
+        }
+        //3.如果right不为空，说明公共祖先为right
+        if (right != null) {
+            return right;
+        }
+        //4.如果都为空，说明没有公共祖先
+        return null;
+    }
+
+    /**
      * 递归         100%  41%
      * 利用二叉搜索树的性质
      */
