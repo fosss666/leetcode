@@ -1,5 +1,8 @@
 package com.fosss.a45_把数组排成最小的数;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
  * @author: fosss
  * Date: 2023/3/12
@@ -13,8 +16,30 @@ public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
         int[] nums = {3, 10, 2};
-        String res = solution.minNumber(nums);
+        String res = solution.minNumber2(nums);
         System.out.println("res = " + res);
+    }
+
+    /**
+     * 自定义排序，Arrays.sort  97%   53%
+     */
+    public String minNumber2(int[] nums) {
+        String[] strings = new String[nums.length];
+        //转为字符串数组
+        for (int i = 0; i < nums.length; i++) {
+            strings[i] = String.valueOf(nums[i]);
+        }
+        Arrays.sort(strings, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return (o1 + o2).compareTo(o2 + o1);
+            }
+        });
+        StringBuilder sb = new StringBuilder();
+        for (String string : strings) {
+            sb.append(string);
+        }
+        return sb.toString();
     }
 
     /**
