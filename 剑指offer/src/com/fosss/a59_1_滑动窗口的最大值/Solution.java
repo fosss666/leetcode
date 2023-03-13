@@ -1,4 +1,4 @@
-package com.fosss.a59_滑动窗口的最大值;
+package com.fosss.a59_1_滑动窗口的最大值;
 
 import java.util.*;
 
