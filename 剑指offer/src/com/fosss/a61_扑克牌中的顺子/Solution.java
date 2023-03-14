@@ -1,5 +1,6 @@
 package com.fosss.a61_扑克牌中的顺子;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +15,25 @@ import java.util.Set;
  * 解题思路：此5张牌是顺子的充分条件是：1.除大小王外，所有牌无重复 2.设此5张牌中最大的牌为max,最小的牌为min(大小王除外)，则需满足：max-min<5
  */
 public class Solution {
+
+    /**
+     * 排序+遍历    100%  48%
+     */
+    public boolean isStraight2(int[] nums) {
+        Arrays.sort(nums);
+        int min = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            //寻找min的下标
+            if (nums[i] == 0) {
+                min++;
+            } else if (nums[i] == nums[i + 1]) {
+                //判断有没有重复的数字
+                return false;
+            }
+        }
+        return nums[nums.length - 1] - nums[min] < 5;
+    }
+
     /**
      * set+遍历    100%  61%
      */
