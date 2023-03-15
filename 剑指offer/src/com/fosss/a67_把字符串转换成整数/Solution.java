@@ -29,7 +29,46 @@ public class Solution {
     }
 
     /**
-     *  自解  面向测试编程   20%  35%
+     * k神，数字越界处理     100%  79%
+     */
+    public int strToInt2(String str) {
+        //去除空格
+        char[] c = str.trim().toCharArray();
+        //判断长度
+        if (c.length == 0) {
+            return 0;
+        }
+        //bndry为
+        int res = 0, bndry = Integer.MAX_VALUE / 10;
+        //sign用来标记符号，i用来表示第一个字符是不是符号
+        int i = 1, sign = 1;
+        //记录符号  sign=1表示正数，sign=-1表示负数
+        if (c[0] == '-') {
+            sign = -1;
+        } else if (c[0] != '+') {
+            i = 0;
+        }
+        for (int j = i; j < c.length; j++) {
+            //判断是不是数字
+            if (c[j] < '0' || c[j] > '9') {
+                break;
+            }
+            //判断是否越界
+            //越界情况：（数字拼接边界bndry=2147483647/10=214748364
+            //1.res>bndry   执行拼接10*res>=2147483650越界
+            //2.res=bndry,x>7   拼接后是2147483648或2147483649越界
+            if (res > bndry || res == bndry && c[j] > '7') {
+                return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+            //拼接数字
+            res = res * 10 + (c[j] - '0');
+        }
+        return sign * res;
+
+    }
+
+    /**
+     * 自解  面向测试编程   20%  35%
      */
     public int strToInt(String str) {
         //去除开头空格
