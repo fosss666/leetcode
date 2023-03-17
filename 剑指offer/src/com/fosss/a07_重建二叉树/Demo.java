@@ -12,6 +12,11 @@ import java.util.Map;
  * 例：  Input: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
  * Output: [3,9,20,null,null,15,7]
  * 限制：0 <= 节点个数 <= 5000
+ *
+ * 思路：
+ * 1.前序遍历中：第一个值为根节点的值。中序遍历中：根节点的左侧为左子树的值，右侧为右子树的值。用map记录中序遍历中值和下标的关系，递归设置左子树
+ * 和右子树
+ *
  */
 public class Demo {
     public static void main(String[] args) {
