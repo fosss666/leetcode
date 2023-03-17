@@ -10,6 +10,11 @@ import java.util.*;
  * 例：输入：head = [1,3,2]
  *    输出：[2,3,1]
  * 限制： 0 <= 链表长度 <= 10000
+ *
+ * 思路：
+ * 1.遍历链表的每个结点，将值储存到栈（也可以用List，转为数组的时候倒叙添加到数组中）中，最后转为数组返回
+ * 2.利用递归的回溯特点
+ *
  */
 public class Demo {
     public static void main(String[] args) {
