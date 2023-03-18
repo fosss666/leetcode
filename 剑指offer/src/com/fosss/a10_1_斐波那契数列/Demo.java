@@ -10,6 +10,9 @@ package com.fosss.a10_1_斐波那契数列;
  * 答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。
  * 例：输入：n = 2  输出：1
  * 限制：0 <= n <= 100
+ * <p>
+ * 思路：
+ * 动态规划实现斐波那契数列函数   和要模1000000007
  */
 public class Demo {
     public static void main(String[] args) {
