@@ -9,6 +9,9 @@ package com.fosss.a13_机器人的运动范围;
  * 3+5+3+7=18。但它不能进入方格 [35, 38]，因为3+5+3+8=19。请问该机器人能够到达多少个格子?
  * 示例：输入：m = 2, n = 3, k = 1  输出：3
  * 提示：1 <= n,m <= 100         0 <= k <= 20
+ * <p>
+ * 思路：
+ * 先写一个函数用来求一个数的各位数字之和，创建二维数组记录各位置是否被访问，用深度优先算法向上下左右判断是否符合条件
  */
 public class Solution {
 
@@ -28,6 +31,17 @@ public class Solution {
         return dfs(0, 0, m, n, k, isVisited);
     }
 
+    /**
+     * 深度搜索有多少符合条件的位置
+     *
+     * @param row       第几行
+     * @param col       第几列
+     * @param m         最大行
+     * @param n         最大列
+     * @param k         各位之和不能大于k
+     * @param isVisited 是否访问过
+     * @return 返回有多少符合条件的位置
+     */
     private int dfs(int row, int col, int m, int n, int k, boolean[][] isVisited) {
         //判断是否在界外或是否访问过或是否符合条件
         if (row < 0 || col < 0 || row >= m || col >= n || isVisited[row][col] || k < (sums(row) + sums(col))) {
