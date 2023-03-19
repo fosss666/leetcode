@@ -1,9 +1,5 @@
 package com.fosss.a11_旋转数组的最小数字;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author fosss
  * date 2023/1/8
@@ -18,6 +14,11 @@ import java.util.List;
  * 1 <= n <= 5000
  * -5000 <= numbers[i] <= 5000
  * numbers 原来是一个升序排序的数组，并进行了 1 至 n 次旋转
+ *
+ * 思路：
+ * 1.二分法：mid=(right-left)/2+left  以left<right为循环条件，  如果nums[mid]>右边的值，则以mid+1为左边界向右查找；如果nums[mid]<右边的值，nums[mid]可能是最小
+ * 值，也可能不是，以mid为右边界进行查找；如果存在重复数字，nums[mid]==右边的值，则令右边界--。最后left==right，nums[left]为最小值
+ * 2.另外，倒序寻找最小值也不失为一种思路，只是旋转数组越接近原升序数组，所需时间越多
  */
 public class Solution {
     public static void main(String[] args) {
@@ -34,6 +35,21 @@ public class Solution {
      */
     public int minArray2(int[] numbers) {
 
+        int left=0,right=numbers.length-1;
+        int mid=0;
+        while(left<right){
+            mid=(right-left)/2+left;
+            if(numbers[mid]>numbers[right]){
+                left=mid+1;
+            }else if(numbers[mid]<numbers[right]){
+                right=mid;
+            }else if(numbers[mid]==numbers[right]){
+                right--;
+            }
+        }
+        return numbers[left];
+
+/*
         int left = 0;
         int right = numbers.length - 1;
         int mid = -1;
@@ -51,7 +67,7 @@ public class Solution {
                 right--;
             }
         }
-        return numbers[mid];
+        return numbers[mid];*/
     }
 
     /**
