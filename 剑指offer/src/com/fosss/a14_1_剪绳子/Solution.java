@@ -9,6 +9,10 @@ package com.fosss.a14_1_剪绳子;
  * 乘积是18。
  * 例：输入: 2  输出: 1  解释: 2 = 1 + 1, 1 × 1 = 1   输入: 10 输出: 36 解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36
  * 提示：2 <= n <= 58
+ * <p>
+ * 思路：
+ * 动态规划思想，用dp[i]记录长度为i的绳子的最大乘积，长度为i的绳子的可能因子为1，2，……i-1
+ * 应遍历这些因子，判断每个因子时对应的最大乘积 —— Math.max(curMax,Math.max(j*(i-j),j*dp[i-j]))
  */
 public class Solution {
     public static void main(String[] args) {
@@ -36,7 +40,7 @@ public class Solution {
         //从2递推到n
         for (int m = 2; m <= n; m++) {
             int curMax = 0;//记录长度为1~m-1时最长的
-            //每段的长度可为1~m-1
+            //每段的长度可为1~m-1  遍历m的左右可能因子
             for (int i = 1; i < m; i++) {
                 curMax = Math.max(curMax, Math.max(i * (m - i), i * max[m - i]));
             }
