@@ -22,6 +22,41 @@ public class Solution {
     }
 
     /**
+     * 数学推导
+     */
+    public int cuttingRope2(int n) {
+        if (n <= 2) {
+            return 1;
+        }
+        if (n == 3) {
+            return 2;
+        }
+        int res = n / 3;
+        int mod = n % 3;
+        if (mod == 0) {
+            return pow(3, res);
+        } else if (mod == 1) {
+            //说明除了3外，还剩下一个4
+            return pow(3, res - 1) * 4;
+        } else {
+            //mod==2  还剩下一个2
+            return pow(3, res) * 2;
+        }
+    }
+
+    /**
+     * 求幂
+     */
+    private int pow(int x, int n) {
+        int res = 1;
+        for (int i = 0; i < n; i++) {
+            res *= x;
+        }
+        return res;
+    }
+
+
+    /**
      * 动态规划
      */
     /**
