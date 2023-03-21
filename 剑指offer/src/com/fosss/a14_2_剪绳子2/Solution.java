@@ -11,20 +11,48 @@ package com.fosss.a14_2_剪绳子2;
  * 提示：2 <= n <= 1000
  */
 public class Solution {
-    public int cuttingRope(int n) {
-        if (n <= 3)
-            return n - 1;
-        int b = n % 3, p = 1000000007;
-        long ret = 1;
-        int lineNums = n / 3;           //线段被我们分成以3为大小的小线段个数
-        for (int i = 1; i < lineNums; i++) //从第一段线段开始验算，3的ret次方是否越界。注意是验算lineNums-1次。
-            ret = 3 * ret % p;
-        if (b == 0)
-            return (int) (ret * 3 % p);   //刚好被3整除的，要算上前一段
-        if (b == 1)
-            return (int) (ret * 4 % p);   //被3整除余1的，要算上前一段
 
-        return (int) (ret * 6 % p);       //被3整除余2的，要算上前一段
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int res = solution.cuttingRope(120);
+        System.out.println("res = " + res);
+    }
+
+    /**
+     * 数学推导
+     */
+    public int cuttingRope(int n) {
+        if (n <= 2) {
+            return 1;
+        }
+        if (n == 3) {
+            return 2;
+        }
+        int res = n / 3;
+        int mod = n % 3;
+        int p = 1000000007;
+        if (mod == 0) {
+            return (int) pow(3, res);
+        } else if (mod == 1) {
+            //说明除了3外，还剩下一个4
+            return (int) (pow(3, res - 1) * 4 % p);
+        } else {
+            //mod==2  还剩下一个2
+            return (int) (pow(3, res) * 2 % p);
+        }
+    }
+
+    /**
+     * 求幂
+     * 注意需要用long,防止超出int范围
+     */
+    private long pow(int x, int n) {
+        long res = 1;
+        int p = 1000000007;
+        for (int i = 0; i < n; i++) {
+            res = (res * x) % p;
+        }
+        return res;
     }
 }
 
