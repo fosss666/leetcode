@@ -1,12 +1,8 @@
 package com.fosss.a17_打印从1到最大的n位数;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * @author fosss
@@ -16,6 +12,10 @@ import java.util.stream.Collectors;
  * 例：输入: n = 1  输出: [1,2,3,4,5,6,7,8,9]
  * 说明：用返回一个整数列表来代替打印
  * n 为正整数
+ *
+ * 思路：
+ * 1.求10^n,然后用for循环给返回数组赋值
+ * 2.字符串拼接，从一位数一直到n位数挨个拼接
  */
 public class Solution {
 
@@ -37,6 +37,7 @@ public class Solution {
     int[] nums = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
     public int[] printNumbers2(int n) {
+        //构造一位数，两位数，一直到n位数
         for (int i = 1; i <= n; i++) {
             dfs(0, i);
         }
@@ -70,7 +71,7 @@ public class Solution {
     }
 
     /**
-     * 自解
+     * 自解    75%  28%
      */
     public int[] printNumbers(int n) {
         if (n == 0) {
