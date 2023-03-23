@@ -2,7 +2,6 @@ package com.fosss.a21_调整数组顺序使奇数位于偶数前面;
 
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author fosss
@@ -11,12 +10,20 @@ import java.util.stream.Collectors;
  * 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数在数组的前半部分，所有偶数在数组的后半部分
  * 例：输入：nums = [1,2,3,4] 输出：[1,3,2,4]   注：[3,1,2,4] 也是正确的答案之一。
  * 提示：0 <= nums.length <= 50000  0 <= nums[i] <= 10000
+ * <p>
+ * 思路：
+ * 1.创建新数组，两次遍历原数组，第一次将奇数放到新数组，第二次将偶数放到新数组
+ * 2.用双指针法对上个方法进行改进乘一次遍历，创建新数组(长度为arr.length)，创建left=0,right=arr.length-1，遍历原数组，奇数则newArr[left++]=arr[i],偶数则
+ * newArr[right--]=arr[i]
+ * 3.原地交换，left=0,right=arr.length-1  while(left<right)时，从左到右找偶数，从右到左找偶数，进行交换
+ * 4.借助队列进行奇偶数的调换：创建队列存储偶数的下标，遍历数组，如果是偶数，则将下标放入队列，如果是奇数，则判断队列是否为空，不为空，则弹出一个
+ * 下标，进行交换后，将偶数新的下标存入队列
  */
 public class Solution {
 
     public static void main(String[] args) {
         //int[] nums = {2, 16, 3, 5, 13, 1, 16, 1, 12, 18, 11, 8, 11, 11, 5, 1};
-        int[] nums = {1, 2, 3, 4};
+        int[] nums = {1, 2, 3, 4, 5};
         Solution solution = new Solution();
         int[] arr = solution.exchange(nums);
         System.out.println(Arrays.toString(arr));
