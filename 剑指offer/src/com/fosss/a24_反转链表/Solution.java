@@ -7,6 +7,12 @@ import java.util.Stack;
  * @date 2023/1/17
  * @description： 定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。
  * 例：输入: 1->2->3->4->5->NULL  输出: 5->4->3->2->1->NULL
+ * <p>
+ * 思路：
+ * 1.利用栈先进后出的特性重新组装一条链表，注意最后一个结点需要指向null，避免循环链表问题
+ * 2.遍历链表，用头插法向新链表中插入数据，注意创建新链表的结点时应该new ListNode,不要直接引用原链表结点
+ * 3.改变指针指向，定义两个结点，一个表示前一个结点pre=null,一个表示当前结点cur=head, 遍历链表，ListNode temp=cur.next;cur.next=pre;
+ * pre=cur;cur=temp;
  */
 public class Solution {
 
@@ -34,6 +40,20 @@ public class Solution {
      */
     public ListNode reverseList3(ListNode head) {
         if (head == null) {
+            return head;
+        }
+        ListNode pre = null, cur = head;
+        while (cur.next != null) {
+            ListNode temp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = temp;
+        }
+        //cur.next==null,pre指向倒数第二个结点，让cur.next指向pre
+        cur.next = pre;
+        return cur;
+
+        /*if (head == null) {
             return null;
         }
         ListNode left=null;
@@ -44,7 +64,7 @@ public class Solution {
             left=cur;
             cur=right;
         }
-        return left;
+        return left;*/
     }
 
     /**
