@@ -5,6 +5,10 @@ package com.fosss.a25_合并两个排序的链表;
  * @date 2023/1/18
  * @description： 输入两个递增排序的链表，合并这两个链表并使新链表中的节点仍然是递增排序的
  * 例：输入：1->2->4, 1->3->4  输出：1->1->2->3->4->4
+ * <p>
+ * 思路：
+ * 创建一个结点preHead，当两条链表都不为空时，将两链表较小的结点放到新链表后面。循环退出后，将没有遍历完的链表放到新链表后面，将preHead.next返
+ * 回即可。这里返回preHead.next这个思路值得学习。
  */
 public class Solution {
 
@@ -62,7 +66,7 @@ public class Solution {
         } else if (l2 == null) {
             return l1;
         }
-        ListNode newHead=l1;
+        ListNode newHead = l1;
         //遍历一个链表，将其结点的数值插入到另一个链表中
         while (l2 != null) {
             newHead = insertVal2(newHead, l2.val);
@@ -73,6 +77,7 @@ public class Solution {
 
     //插入结点的位置
     public static ListNode insertNode = null;
+
     //向链表中插入数值
     private ListNode insertVal2(ListNode head, int val) {
         if (head.val >= val) {
