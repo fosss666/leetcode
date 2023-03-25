@@ -8,7 +8,15 @@ import java.util.Queue;
 /**
  * @author fosss
  * @date 2023/1/21
- * @description：
+ * @description： 请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的
+ * 示例：输入：root = [1,2,2,3,4,4,3] 输出：true
+ * 限制：0 <= 节点个数 <= 1000
+ * <p>
+ * 思路：
+ * 1.利用队列，创建方法，两个参数初始都为root,保存到queue中，当queue不为空时，poll出两个结点进行判断。若两个结点都为空，则跳到下一个循环；一个
+ * 结点为空或两结点值不同，返回false。将两个结点的左右子树存储到queue中，因为要判断是否对称，所以存储时应该先存结点1的左子树，再存2的右子树，再存
+ * 1的右子树，再存2的左子树。循环正常退出则返回true
+ * 2.递归
  */
 public class Solution {
 
@@ -33,7 +41,7 @@ public class Solution {
     }
 
     /**
-     * 迭代
+     * 迭代      很慢
      */
     public boolean isSymmetric3(TreeNode root) {
         if (root == null) {
@@ -65,7 +73,7 @@ public class Solution {
 
 
     /**
-     * 递归判断左右子树是否相等
+     * 递归判断左右子树是否相等         100%  27%
      */
     public boolean isSymmetric2(TreeNode root) {
         return judgment(root, root);
@@ -82,7 +90,7 @@ public class Solution {
     }
 
     /**
-     * 自解，构造镜像树
+     * 自解，构造镜像树   最慢
      */
     public boolean isSymmetric(TreeNode root) {
 
