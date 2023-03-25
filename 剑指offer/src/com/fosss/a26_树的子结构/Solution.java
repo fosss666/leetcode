@@ -1,11 +1,6 @@
 package com.fosss.a26_树的子结构;
 
 
-import sun.reflect.generics.tree.Tree;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author fosss
  * @date 2023/1/19
@@ -13,6 +8,13 @@ import java.util.List;
  * B是A的子结构， 即 A中有出现和B相同的结构和节点值。
  * 例：输入：A = [3,4,5,1,2], B = [4,1] 输出：true
  * 限制：0 <= 节点个数 <= 10000
+ * <p>
+ * 思路：
+ * B为A的子树有三种可能：
+ * 1）B以root的为根节点
+ * 2）B为左子树
+ * 3）B为右子树
+ * 以这三种可能进行递归判断，
  */
 public class Solution {
     public static void main(String[] args) {
@@ -54,96 +56,104 @@ public class Solution {
         //树B是树A右子树的子结构，对应aisSubStructure(A.right,B)；
         return (A != null && B != null) && (recur(A, B) || isSubStructure2(A.left, B) || isSubStructure2(A.right, B));
     }
+
     boolean recur(TreeNode A, TreeNode B) {
-        if(B == null) return true;
-        if(A == null || A.val != B.val) return false;
+        //B==null 说明B的各节点都已经匹配，即B是A的子树
+        if (B == null) {
+            return true;
+        }
+        //A==null 或A B 结点的值不同，说明B不是A的子树
+        if (A == null || A.val != B.val) {
+            return false;
+        }
+        //判断A B的左右子树是否相同
         return recur(A.left, B.left) && recur(A.right, B.right);
     }
 
     /**
      * 自解
      */
-    public boolean isSubStructure(TreeNode A, TreeNode B) {
-        if (B == null) {
-            return false;
-        }
-        //1.从A中找到与B中首节点数值相同的所有结点
-        getHeadNode(A, B.val);
-        //2.遍历B，取出数值存在集合中
-        List<Integer> vals = getVals(B);
-        //遍历headNode这个子树，看看是否有B树
-        for (TreeNode node : nodes) {
-            boolean b = hasB(node, vals);
-            if (b) {
-                return true;
-            }
-            //此时应将i重置为0！！！！！！！！！！
-            i = 0;
-        }
-        return false;
-    }
-
-    //遍历headNode这个子树，看看是否有B树
-    private static int i = 0;
-
-    private boolean hasB(TreeNode headNode, List<Integer> vals) {
-        if (i == vals.size()) {
-            return true;
-        }
-        if (headNode != null && headNode.val == vals.get(i)) {
-            i++;
-        } else {
-            return false;
-        }
-        boolean result1 = true;
-        boolean result2 = true;
-        if (headNode.left != null) {
-            boolean b = hasB(headNode.left, vals);
-            if (!b) {
-                result1 = false;
-            }
-
-        }
-        if (headNode.right != null) {
-            boolean b = hasB(headNode.right, vals);
-            if (!b) {
-                result2 = false;
-            }
-        }
-        return result1 && result2;
-    }
-
-    //前序遍历
-    private static List<Integer> vals = new ArrayList<>();
-
-    private List<Integer> getVals(TreeNode node) {
-        if (node != null) {
-            vals.add(node.val);
-        }
-        if (node != null && node.left != null) {
-            vals.add(node.left.val);
-        }
-        if (node != null && node.right != null) {
-            vals.add(node.right.val);
-        }
-        return vals;
-    }
-
-    //从A中找到与B中首节点数值相同的所有结点
-    private static List<TreeNode> nodes = new ArrayList<>();
-
-    private void getHeadNode(TreeNode A, int val) {
-        if (A != null && A.val == val) {
-            nodes.add(A);
-        }
-        TreeNode result = null;
-        if (A.left != null) {
-            getHeadNode(A.left, val);
-        }
-        if (A.right != null) {
-            getHeadNode(A.right, val);
-        }
-    }
+    //public boolean isSubStructure(TreeNode A, TreeNode B) {
+    //    if (B == null) {
+    //        return false;
+    //    }
+    //    //1.从A中找到与B中首节点数值相同的所有结点
+    //    getHeadNode(A, B.val);
+    //    //2.遍历B，取出数值存在集合中
+    //    List<Integer> vals = getVals(B);
+    //    //遍历headNode这个子树，看看是否有B树
+    //    for (TreeNode node : nodes) {
+    //        boolean b = hasB(node, vals);
+    //        if (b) {
+    //            return true;
+    //        }
+    //        //此时应将i重置为0！！！！！！！！！！
+    //        i = 0;
+    //    }
+    //    return false;
+    //}
+    //
+    ////遍历headNode这个子树，看看是否有B树
+    //private static int i = 0;
+    //
+    //private boolean hasB(TreeNode headNode, List<Integer> vals) {
+    //    if (i == vals.size()) {
+    //        return true;
+    //    }
+    //    if (headNode != null && headNode.val == vals.get(i)) {
+    //        i++;
+    //    } else {
+    //        return false;
+    //    }
+    //    boolean result1 = true;
+    //    boolean result2 = true;
+    //    if (headNode.left != null) {
+    //        boolean b = hasB(headNode.left, vals);
+    //        if (!b) {
+    //            result1 = false;
+    //        }
+    //
+    //    }
+    //    if (headNode.right != null) {
+    //        boolean b = hasB(headNode.right, vals);
+    //        if (!b) {
+    //            result2 = false;
+    //        }
+    //    }
+    //    return result1 && result2;
+    //}
+    //
+    ////前序遍历
+    //private static List<Integer> vals = new ArrayList<>();
+    //
+    //private List<Integer> getVals(TreeNode node) {
+    //    if (node != null) {
+    //        vals.add(node.val);
+    //    }
+    //    if (node != null && node.left != null) {
+    //        vals.add(node.left.val);
+    //    }
+    //    if (node != null && node.right != null) {
+    //        vals.add(node.right.val);
+    //    }
+    //    return vals;
+    //}
+    //
+    ////从A中找到与B中首节点数值相同的所有结点
+    //private static List<TreeNode> nodes = new ArrayList<>();
+    //
+    //private void getHeadNode(TreeNode A, int val) {
+    //    if (A != null && A.val == val) {
+    //        nodes.add(A);
+    //    }
+    //    TreeNode result = null;
+    //    if (A.left != null) {
+    //        getHeadNode(A.left, val);
+    //    }
+    //    if (A.right != null) {
+    //        getHeadNode(A.right, val);
+    //    }
+    //}
 }
 
 
