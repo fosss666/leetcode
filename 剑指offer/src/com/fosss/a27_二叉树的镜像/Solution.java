@@ -2,12 +2,16 @@ package com.fosss.a27_二叉树的镜像;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * @author fosss
  * @date 2023/1/20
  * @description： 请完成一个函数，输入一个二叉树，该函数输出它的镜像。
+ * <p>
+ * 思考：
+ * 镜像即左右子树交换
+ * 1.辅助栈（队列、集合），将root结点放到栈中，当栈不为空时，弹出结点，（将结点的左右结点放入栈），将结点的左右结点交换
+ * 2.递归，root==null 为退出条件，暂时存储左结点（或右节点），将左结点赋值为递归右结点。将右结点赋值为递归暂存结点，返回root
  */
 public class Solution {
     public static void main(String[] args) {
@@ -33,7 +37,7 @@ public class Solution {
         System.out.println("原来的树：");
         TreeNode.indexOrder(node1);
         System.out.println("\n现在的树：");
-        TreeNode treeNode = solution.mirrorTree2(node1);
+        TreeNode treeNode = solution.mirrorTree(node1);
         TreeNode.indexOrder(treeNode);
 
     }
@@ -76,7 +80,7 @@ public class Solution {
         if (root == null) {
             return null;
         }
-        //暂时存储root的左子节点
+        //！！暂时存储root的左子节点：再递归右子节点后，root.left值已经发生改变
         TreeNode left = root.left;
         root.left = mirrorTree(root.right);
         root.right = mirrorTree(left);
