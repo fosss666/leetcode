@@ -1,7 +1,6 @@
 package com.fosss.a32_2_从上到下分行打印二叉树;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 /**
  * @author fosss
@@ -12,6 +11,10 @@ import java.util.function.Predicate;
  * [9,20],
  * [15,7]
  * ]
+ * <p>
+ * 思路：
+ * 遍历树的思路和上一题一致，区别在于输出时需要分行，所以要将二叉树每一层分别存储到一个集合中，再将每一层的集合存储到结果集合中
+ * 在while循环中，每一个for循环就是一层，所以将for循环中要存储的值放到一个集合中，for循环结束后，将集合存储到结果集合中
  */
 public class Solution {
     public static void main(String[] args) {
