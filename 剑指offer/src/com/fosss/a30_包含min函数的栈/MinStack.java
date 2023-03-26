@@ -60,8 +60,8 @@ public class MinStack {
 
     public void pop() {
         if (!stack.isEmpty()) {
-            int x = stack.pop();
-            if (x == minStack.peek()) {
+            Integer x = stack.pop();
+            if (x.equals(minStack.peek())) {
                 minStack.pop();
             }
         }
