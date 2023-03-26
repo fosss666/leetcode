@@ -12,6 +12,13 @@ import java.util.Arrays;
  * 1  2  3
  * 4  5  6
  * 7  8  9
+ * <p>
+ * 思路：
+ * 设定上下左右边界 一个while,四个for循环判断
+ * 1）从左边界向右，遇到右边界停止，上边界向下移动一行
+ * 2）从上边界向下，遇到下边界停止，右边界向左移动一列
+ * 3）从右边界向左，遇到左边界停止，下边界向上移动一行
+ * 4）从下边界向上，遇到上边界停止，左边界向右移动一列
  */
 public class Solution {
     public static void main(String[] args) {
