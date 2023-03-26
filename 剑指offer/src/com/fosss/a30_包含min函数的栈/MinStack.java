@@ -16,6 +16,13 @@ import java.util.*;
  * minStack.top();      --> 返回 0.
  * minStack.min();   --> 返回 -2.
  * 提示：各函数的调用总次数不超过 20000 次
+ * <p>
+ * 思路：
+ * 创建两个栈，一个用来push,pop,top等操作(stack)，一个用来保存min(minStack)
+ * push:向stack中push,如果minStack为空或x小于等于最小值，则向minStack中push
+ * pop:从stack中pop，将pop的值与minStack中最小值比对，相等则minStack执行pop操作
+ * top:返回stack的头部元素
+ * min:返回minStack的头部元素
  */
 public class MinStack {
 
@@ -33,10 +40,46 @@ public class MinStack {
         System.out.println(minStack.min());
     }
 
+    private Stack<Integer> stack;
+    private Stack<Integer> minStack;
 
     /**
-     * ===============自解，双栈
+     * initialize your data structure here.
      */
+    public MinStack() {
+        stack = new Stack<>();
+        minStack = new Stack<>();
+    }
+
+    public void push(int x) {
+        stack.push(x);
+        if (minStack.isEmpty() || minStack.peek() >= x) {
+            minStack.push(x);
+        }
+    }
+
+    public void pop() {
+        if (!stack.isEmpty()) {
+            int x = stack.pop();
+            if (x == minStack.peek()) {
+                minStack.pop();
+            }
+        }
+
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public int min() {
+        return minStack.peek();
+    }
+
+    /*
+     *//**
+     * ===============自解，双栈
+     *//*
     LinkedList<Integer> stack;
     LinkedList<Integer> minStack;
 
@@ -72,7 +115,7 @@ public class MinStack {
 
     public int min() {
         return minStack.getFirst();
-    }
+    }*/
 }
 
 
