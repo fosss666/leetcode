@@ -13,6 +13,10 @@ import java.util.*;
  * 树中节点总数在范围 [0, 5000] 内
  * -1000 <= Node.val <= 1000
  * -1000 <= targetSum <= 1000
+ * <p>
+ * 思考：
+ * 这里为什么要借助LinkedList来保存每个路径呢？这个解法用到了递归，到达叶子节点前,一直向集合中添加元素,递归完成后,需要从后往前删除结点来寻找其他
+ * 符合条件的路径,所以后进先出,与栈的特点相同,然而返回对象是 List<List<Integer>> ,所以为了避免转换,可用LinkedList模拟栈
  */
 public class Solution {
 
@@ -48,11 +52,12 @@ public class Solution {
         if (root == null) {
             return;
         }
-        stack.add(root.val);
+        stack.addLast(root.val);
 
         target -= root.val;
         if (target == 0 && root.left == null && root.right == null) {
-            //值得注意的是，记录路径时若直接执行 res.append(path) ，则是将 path 对象加入了 res ；后续 path 改变时， res 中的 path 对象也会随之改变。
+            //!!!值得注意的是，记录路径时若直接执行 res.append(path) ，则是将 path 对象加入了 res ；后续 path 改变时， res 中的 path 对象
+            //也会随之改变。
             //正确做法：res.append(list(path)) ，相当于复制了一个 path 并加入到 res
             res.add(new LinkedList<>(stack));
         }
