@@ -15,6 +15,12 @@ import java.util.Map;
  * -10000 <= Node.val <= 10000
  * Node.random 为空（null）或指向链表中的节点。
  * 节点数目不超过 1000
+ * <p>
+ * 思考：
+ * 1.借用哈希表，遍历链表，以结点为key,new 结点（结点值）为值存入map中，然后从新遍历链表，设置每个值的next(map.get(tmp.next))和
+ * random(map.get(tmp.random))
+ * 2.拼接拆分，先构建next；再构建random，构建random和构建next不能公用一个while循环，因为构建random必须在链表完整时；再进行拆分。因为
+ * 不能改变原链表，所以应该将原链表和复制的链表都单独拆分出来
  */
 public class Solution {
 
@@ -48,6 +54,7 @@ public class Solution {
         temp = newHead;
         Node pre = head;
         //temp.next只要不为空，temp.next.next就不为空（因为它是temp.next复制得来的）
+        //不能用pre.next!=null来判断，因为pre.next指向它的复制，应该用它的复制来判断
         while (temp.next != null) {
             pre.next = pre.next.next;
             temp.next = temp.next.next;
