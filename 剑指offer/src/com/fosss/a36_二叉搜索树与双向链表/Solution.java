@@ -8,6 +8,15 @@ import java.util.List;
  * @date 2023/1/31
  * @description： 输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的循环双向链表。要求不能创建任何新的节点，只能调整树中节点指针的指向
  * 分析：left作为前驱结点，right作为后继结点。中序遍历可以按照结点的值从小到大的顺序得到结点
+ * <p>
+ * 思考：
+ * 1.中序遍历+集合存储。将二叉搜索树转换成一个排序的循环双向链表，中序遍历二叉搜索树可以得到排序的结果，将中序遍历的结点放到集合中，再对这
+ * 个集合进行处理，遍历集合，设置每个结点的前驱节点和后继节点（借助模运算来方便处理首结 点和尾结点）
+ * 2.中序遍历（不借助集合）。设置两个成员变量，一个用来存储头结点，一个用来存储当前结点的前一个结点。编写中序遍历方法，中间部分的处理：pre
+ * ==null时，存储头结点（head=null），将pre=root,回溯到下一个过程后，pre就相当于root的前一个结点，这个过程中pre!=null,所以设置前驱
+ * 结点和后继结点 pre.right=root;root.left=pre; 然后更新pre=root;
+ * 主操作方法中，调用中序遍历方法，此时头结点和尾结点的前驱节点和后继结点还未设置，所以需要设置，设置成员变量head也是为了这个步骤：pre.right
+ * =head; head.left=pre;
  */
 public class Solution {
 
@@ -29,10 +38,10 @@ public class Solution {
     }
 
     private void dfs(Node root) {
-        if (root == null) {
-            return;
+        if (root.left != null) {
+            dfs(root.left);
         }
-        dfs(root.left);
+
         if (pre == null) {
             head = root;
         } else {
@@ -40,7 +49,21 @@ public class Solution {
             root.left = pre;
         }
         pre = root;
-        dfs(root.right);
+        if (root.right != null) {
+            dfs(root.right);
+        }
+        //if (root == null) {
+        //    return;
+        //}
+        //dfs(root.left);
+        //if (pre == null) {
+        //    head = root;
+        //} else {
+        //    pre.right = root;
+        //    root.left = pre;
+        //}
+        //pre = root;
+        //dfs(root.right);
     }
 
     /**
