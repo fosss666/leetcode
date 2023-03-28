@@ -1,15 +1,23 @@
 package com.fosss.a37_序列化二叉树;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 /**
  * @author fosss
  * @date 2023/2/1
  * @description： 请实现两个函数，分别用来序列化和反序列化二叉树。
- * 你需要设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符串并且
- * 将这个字符串反序列化为原始的树结构
+ * 你需要设计一个算法来实现二叉树的序列化与反序列化。这里不限定你的序列化 / 反序列化算法执行逻辑，你只需要保证一个二叉树可以被序列化为一个字符
+ * 串并且将这个字符串反序列化为原始的树结构
+ * <p>
+ * 思路:
+ * 1.序列化：将二叉树转成一个字符串，因为还需要用这个字符串反序列化成原来的二叉树，所以要存储完整的二叉树结构，即要将叶子结点下的null也要存储到
+ * 字符串中，从而防止有左子树而没有右子树的问题。采用层序遍历（借助队列实现）来拼接字符串，结点为空则拼接null，所以向队列中添加元素时无需判断结
+ * 点是否为空；结点不为空则拼接结点的值，
+ * 2.反序列化：
+ * 1） 去掉字符串两端的"[]"，以"," 分割字符串形成字符串数组
+ * 2) 接下来构建二叉树：同样借助队列来实现层序构建，分别设置poll的左子树和右子树，如果s[index]不是"null",new 结点并设置为左子树，index++;
+ * 如果s[index]不是"null",new 结点并设置为右子树，index++
  */
 public class Solution {
 
@@ -26,6 +34,8 @@ public class Solution {
         Solution solution = new Solution();
         String serialize = solution.serialize(node1);
         System.out.println("serialize = " + serialize);
+        TreeNode deserialize = solution.deserialize(serialize);
+        System.out.println("deserialize = " + deserialize.val);
     }
 
     /**
