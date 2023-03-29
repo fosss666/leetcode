@@ -8,6 +8,13 @@ import java.util.*;
  * @description： 数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。你可以假设数组是非空的，并且给定的数组总是存在多数元素
  * 例：输入: [1, 2, 3, 2, 2, 2, 5, 4, 2]  输出: 2
  * 限制：1 <= 数组长度 <= 50000
+ * <p>
+ * 思路：
+ * 1.直接遍历数组，借助map来记录重复数字出现的次数，找到出现次数超过数组长度一半的数字
+ * 2.先排序，再遍历数组，连续出现超过数组长度一半则直接返回
+ * 3.若数组中一定有一个数字出现次数超过数组长度一半，则先对数组进行排序，返回中间的数即可
+ * 4.摩尔投票法：极限一换一，设变量x，votes，x用来保存要找的数，votes用来标记，当votes==0时，更新x。遍历数组，当num==x时，votes+1;否则votes-1;
+ * 最后的x就是要寻找的数字
  */
 public class Solution {
 
@@ -24,8 +31,8 @@ public class Solution {
      */
     public int majorityElement3(int[] nums) {
         int x = 0, votes = 0;
-        for(int num : nums){
-            if(votes == 0) x = num;
+        for (int num : nums) {
+            if (votes == 0) x = num;
             votes += num == x ? 1 : -1;
         }
         return x;
