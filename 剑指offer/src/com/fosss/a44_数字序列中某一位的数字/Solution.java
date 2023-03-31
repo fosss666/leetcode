@@ -7,6 +7,9 @@ package com.fosss.a44_数字序列中某一位的数字;
  * 请写一个函数，求任意第n位对应的数字
  * 例：输入：n = 3  输出：3
  * 限制：0 <= n < 2^31
+ *
+ * 思路：
+ * 找规律题。。
  */
 public class Solution {
 
@@ -20,12 +23,12 @@ public class Solution {
      * 找规律题
      * 用long，因为int表示的范围不够
      *
-     * 数字范围   位数   数字数量   数位数量
-     * 1 - 9      1        9          9
-     * 10 - 99     2        90         180
+     * 数字范围      位数      数字数量     数位数量
+     * 1 - 9        1        9          9
+     * 10 - 99      2        90         180
      * 100 - 999    3        900        2700
-     * ...      ...       ...        ...
-     * start - end   digit    9*start   9*start*dight
+     * ...         ...       ...        ...
+     * start~end   digit     9*start    9*start*dight
      */
     public int findNthDigit2(int n) {
 
