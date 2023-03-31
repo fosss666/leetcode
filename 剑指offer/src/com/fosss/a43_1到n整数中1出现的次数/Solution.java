@@ -6,6 +6,9 @@ package com.fosss.a43_1到n整数中1出现的次数;
  * @description： 输入一个整数 n ，求1～n这n个整数的十进制表示中1出现的次数
  * 例如，输入12，1～12这些整数中包含1 的数字有1、10、11和12，1一共出现了5次   输入：n = 12  输出：5
  * 限制：1 <= n < 2^31
+ *
+ * 思路：
+ * 相当于找规律问题.. 分情况判断
  */
 public class Solution {
 
@@ -19,9 +22,9 @@ public class Solution {
      * k神，分别判断
      */
     public int countDigitOne2(int n) {
-        //dight代表当前位数
+        //digit代表当前位数（个十百千万）
         int digit = 1, res = 0;
-        //high代表当前位左边的所有数,low代表当前位右边的所有数
+        //high代表当前位左边的所有数,low代表当前位右边的所有数 cur代表当前位是数字几
         int high = n / 10, cur = n % 10, low = 0;
         while (high != 0 || cur != 0) {
             if (cur == 0) {
