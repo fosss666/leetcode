@@ -13,7 +13,7 @@ package com.fosss.a42_连续子数组的最大和;
 public class Solution {
 
     public static void main(String[] args) {
-        int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        int[] nums = {1, 2};
         Solution solution = new Solution();
         int res = solution.maxSubArray2(nums);
         System.out.println("res = " + res);
@@ -23,15 +23,24 @@ public class Solution {
      * 动态规划-优化版
      */
     public int maxSubArray3(int[] nums) {
+
         int max = nums[0];//记录最大值
         int pre = 0;//记录dp[i-1]
 
-        for (int num : nums) {
-            int cur = pre > 0 ? num + pre : num;
+        for (int i = 0; i < nums.length; i++) {
+            int cur = pre > 0 ? nums[i] + pre : nums[i];
             max = Math.max(max, cur);
             pre = cur;//更新pre
         }
         return max;
+
+        //int max = nums[0];
+        //int cur = nums[0];
+        //for (int i = 1; i < nums.length; i++) {
+        //    cur = cur > 0 ? cur + nums[i] : nums[i];
+        //    max = Math.max(cur, max);
+        //}
+        //return max;
     }
 
     /**
@@ -39,19 +48,12 @@ public class Solution {
      */
     public int maxSubArray2(int[] nums) {
 
-        if (nums.length == 1) {
-            return nums[0];
-        }
-
         int[] dp = new int[nums.length];
         dp[0] = nums[0];
-        dp[1] = nums[0];
-        //定义一个变量记录最大值
         int max = nums[0];
         for (int i = 1; i < nums.length; i++) {
-            int cur = dp[i - 1] > 0 ? dp[i - 1] + nums[i] : nums[i];
-            max = Math.max(max, cur);
-            dp[i] = cur;
+            dp[i] = dp[i - 1] > 0 ? dp[i - 1] + nums[i] : nums[i];
+            max = Math.max(dp[i], max);
         }
         return max;
     }
