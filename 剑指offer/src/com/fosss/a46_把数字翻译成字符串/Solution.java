@@ -6,13 +6,16 @@ import java.util.Map;
 /**
  * @author fosss
  * @date 2023/2/9
- * @description： 给定一个数字，我们按照如下规则把它翻译为字符串：0 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。一个数字可能有多个翻译。
- * 请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法
+ * @description： 给定一个数字，我们按照如下规则把它翻译为字符串：0 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。一个数字可能有多
+ * 个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法
  * 例：
  * 输入: 12258
  * 输出: 5
  * 解释: 12258有5种不同的翻译，分别是"bccfi", "bwfi", "bczi", "mcfi"和"mzi"
  * 限制：0 <= num < 231
+ * <p>
+ * 思路：
+ * 只要数字位于0~25就符合条件，长度为n的数字字符串，至少有一种翻译，如果相邻两个数字位于1~25之间，则多一种翻译，以此判断有多少不同的翻译
  */
 public class Solution {
 
@@ -26,21 +29,35 @@ public class Solution {
      * 动态规划3-数字求余
      */
     public int translateNum3(int num) {
+
         int a = 1, b = 1;
-        //num的最后一位数
-        int y = num % 10;
-        int x;
+
         while (num != 0) {
+            int y = num % 10;
             num /= 10;
-            x = num % 10;
+            int x = num % 10;
             int n = x * 10 + y;
-            int c = n >= 10 && n <= 25 ? a + b : a;
-            //更新
-            y = x;
+            int c = n > 9 && n <= 25 ? a + b : a;
             b = a;
             a = c;
         }
         return a;
+
+        //int a = 1, b = 1;
+        ////num的最后一位数
+        //int y = num % 10;
+        //int x;
+        //while (num != 0) {
+        //    num /= 10;
+        //    x = num % 10;
+        //    int n = x * 10 + y;
+        //    int c = n >= 10 && n <= 25 ? a + b : a;
+        //    //更新
+        //    y = x;
+        //    b = a;
+        //    a = c;
+        //}
+        //return a;
     }
 
     /**
