@@ -1,8 +1,5 @@
 package com.fosss.a47_礼物的最大价值;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author fosss
  * @date 2023/2/12
@@ -17,6 +14,10 @@ import java.util.List;
  * 输出: 12
  * 解释: 路径 1→3→5→2→1 可以拿到最多价值的礼物
  * 提示：0 < grid.length <= 200   0 < grid[0].length <= 200
+ * <p>
+ * 思路：
+ * dp[i][j] 表示第i行j列礼物最大累计价值
+ * （i,j）处只可能是向右或下走,dp[i][j] 赋值成他俩较大的一个加上当前礼物值grid(i-1,j-1)
  */
 public class Solution {
 
@@ -31,16 +32,43 @@ public class Solution {
         System.out.println("res = " + res);
     }
 
+
+    /**
+     * 动态规划
+     */
+    public int maxValue(int[][] grid) {
+
+        int m = grid.length, n = grid[0].length;
+        int[][] dp = new int[m + 1][n + 1];
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                //（i,j）处只可能向右或向下走，dp（i+1.j+1）是下一个累计最大礼物值 dp[i + 1][j]：下面礼物值  dp[i][j + 1]：右面礼物值
+                dp[i + 1][j + 1] = Math.max(dp[i][j + 1] + grid[i][j], dp[i + 1][j] + grid[i][j]);
+            }
+        }
+        return dp[m][n];
+
+        //int row = grid.length;
+        //int col = grid[0].length;
+        //int[][] dp = new int[row + 1][col + 1];
+        //for (int i = 1; i <= grid.length; i++) {
+        //    for (int j = 1; j <= grid[0].length; j++) {
+        //        //（i,j）处只可能向右或向下走，（i-1.j-1）是当前礼物值 dp[i - 1][j]：右面礼物值  dp[i][j - 1]：下面礼物值
+        //        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]) + grid[i - 1][j - 1];
+        //    }
+        //}
+        //return dp[row][col];
+    }
+
     /**
      * 动态规划-k神版
      * 当i=0且j=0时，为起始元素；
      * 当i=0且j!=0时，为矩阵第一行元素，只可从左边到达；
      * 当i!=0且j=0时，为矩阵第一列元素，只可从上边到达；
      * 当i,j!=0时，可从左边或上边到达
-     *
+     * <p>
      * 空间复杂度优化：由于dp[i][j]只与 dp[i-1][j], dp[i][j-1], grid[i][j]grid[i][j] 有关系，
      * 因此可以将原矩阵grid用作dp矩阵，即直接在grid上修改即可
-     *
      */
     public int maxValue2(int[][] grid) {
         int row = grid.length;
@@ -62,21 +90,6 @@ public class Solution {
             }
         }
         return grid[row - 1][col - 1];
-    }
-
-    /**
-     * 动态规划
-     */
-    public int maxValue(int[][] grid) {
-        int row = grid.length;
-        int col = grid[0].length;
-        int[][] dp = new int[row + 1][col + 1];
-        for (int i = 1; i <= grid.length; i++) {
-            for (int j = 1; j <= grid[0].length; j++) {
-                dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]) + grid[i - 1][j - 1];
-            }
-        }
-        return dp[row][col];
     }
 
 }
