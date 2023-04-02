@@ -28,7 +28,7 @@ public class Solution {
                 {4, 2, 1}
         };
         Solution solution = new Solution();
-        int res = solution.maxValue2(grid);
+        int res = solution.maxValue(grid);
         System.out.println("res = " + res);
     }
 
@@ -43,7 +43,7 @@ public class Solution {
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
                 //（i,j）处只可能向右或向下走，dp（i+1.j+1）是下一个累计最大礼物值 dp[i + 1][j]：下面礼物值  dp[i][j + 1]：右面礼物值
-                dp[i + 1][j + 1] = Math.max(dp[i][j + 1] + grid[i][j], dp[i + 1][j] + grid[i][j]);
+                dp[i + 1][j + 1] = Math.max(dp[i][j + 1], dp[i + 1][j]) + grid[i][j];
             }
         }
         return dp[m][n];
