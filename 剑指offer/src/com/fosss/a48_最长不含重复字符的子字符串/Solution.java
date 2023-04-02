@@ -11,12 +11,19 @@ import java.util.*;
  * 输出: 3
  * 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
  * 提示：s.length <= 40000
+ * <p>
+ * 思路：
+ * 动态规划，dp[i]表示遍历到下标为i时的子字符串长度,初始化dp[0]=1表示遍历到第一个字符时，子字符串的长度为1。借助map来判断字符是否重复，键为字符，值为该字符在
+ * 字符串中的下标。在遍历字符串的各个字符时，如果map中不存在该字符，则dp[i]=dp[i-1]+1；若存在该字符，则需要分情况讨论，如果该字符下标i-重复的字符下标
+ * k>dp[i-1]，则说明该重复的字符是之前已经判断过的了（即已经算到其他子字符串长度里边去了，而现在正在判断一个新的子字符串，即该字符在目前这个子字符串中还没有出现
+ * 过，对目前这个子字符串来说不是重复的），对目前正在增加长度的子字符串长度没有影响，dp[i]=dp[i-1]+1,否则dp[i]=i-k。
+ * 小技巧，在循环外将子字符串的最长长度变量定义出来，每次遍历时与dp[i]进行比较取大值，这样之后就不用再去遍历dp数组找最大值了
  */
 public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int res = solution.lengthOfLongestSubstring2("aab");
+        int res = solution.lengthOfLongestSubstring2("abcabcbb");
         System.out.println("res = " + res);
     }
 
@@ -75,7 +82,8 @@ public class Solution {
                 dp[i] = dp[i - 1] + 1;
             } else {
                 //哈希表中有该字符，则根据上一个字符dp[i-1]是否在这两个重复的字符之间的区间 来设置dp[i]的值
-                //i - k <= dp[i - 1]可以画图看出来这个公式表示k在dp[i-1]这个长度的字符串区间外
+
+                // i - k <= dp[i - 1]可以画图看出来这个公式表示k在dp[i-1]这个长度的字符串区间外
                 Integer k = map.get(s.charAt(i));
                 dp[i] = i - k <= dp[i - 1] ? i - k : dp[i - 1] + 1;
             }
