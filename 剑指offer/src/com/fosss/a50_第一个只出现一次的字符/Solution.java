@@ -11,6 +11,10 @@ import java.util.stream.Collectors;
  * 例：输入：s = "abaccdeff"  输出：'b'
  * 限制：0 <= s 的长度 <= 50000
  * 提示：这种是否重复的问题，可以考虑哈希表（HashMap是无序的）或LinkedHashSet
+ * <p>
+ * 思路：
+ * Map<Character,Boolean>用来存储一个字符是否被访问。可以用有序的LinkedHashMap，返回时遍历该map找到要返回的最先出现的符合要求的字符；也可以用HashMap,
+ * 尽管HashMap是无序的，但是可以遍历字符数组，以字符为key寻找最先出现的符合要求的字符
  */
 public class Solution {
 
@@ -27,10 +31,10 @@ public class Solution {
         //LinkedHashMap
         Map<Character, Boolean> dic = new LinkedHashMap<>();
         char[] sc = s.toCharArray();
-        for(char c : sc)
+        for (char c : sc)
             dic.put(c, !dic.containsKey(c));
-        for(Map.Entry<Character, Boolean> d : dic.entrySet()){
-            if(d.getValue()) return d.getKey();
+        for (Map.Entry<Character, Boolean> d : dic.entrySet()) {
+            if (d.getValue()) return d.getKey();
         }
         return ' ';
 
