@@ -12,6 +12,12 @@ import java.util.List;
  * 输出: 12
  * 解释: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12 是前 10 个丑数。
  * 说明：1是丑数。n不超过1690
+ * <p>
+ * 思路:
+ * 1.将num的因子获取到，判断是不是只有2，3，5。获取时需要注意，因子能整除已获取的因子时，不需要将该因子放到因子集合中。此方法超时。
+ * 2.对每个数，判断他是不是丑数（能整除（2、3、5）的时候就一直除，最后判断结果是不是1，是1则说明是丑数），是的话count++,一直到count==n时结束。此方法超时。
+ * 3.动态规划。原理：丑数 = 某较小丑数×某因子。
+ * dp[i]表示第（i+1）个丑数。dp[i]就等于他之前没有使用过的3个丑数*(2或3或5)中较小的那个值
  */
 public class Solution {
 
@@ -27,7 +33,7 @@ public class Solution {
      */
     public int nthUglyNumber3(int n) {
         int a = 0, b = 0, c = 0;
-        //dp[i]表示第（i-1）个丑数
+        //dp[i]表示第（i+1）个丑数
         int[] dp = new int[n];
         dp[0] = 1;
         for (int i = 1; i < n; i++) {
@@ -109,7 +115,7 @@ public class Solution {
     //找到一个数的因子（因子的因子不能是res中的）
     private List<Integer> getFactors(int n) {
         List<Integer> res = new ArrayList<>();
-        for (int i = 2; i <= n / 2; i++) {
+        for (int i = 2; i <= Math.sqrt(n); i++) {
             if (n % i == 0) {
                 //8的因子有4，但是4的因子只有2，所以8也是丑数
                 //是因子，判断i的因子是否由res中的数组成
@@ -121,6 +127,7 @@ public class Solution {
                     if (i % res.get(j) == 0) {
                         //是的话，不能添加到集合中
                         flag = false;
+                        break;
                     }
                 }
                 if (flag) {
