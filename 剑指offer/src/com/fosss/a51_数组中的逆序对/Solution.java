@@ -7,39 +7,46 @@ package com.fosss.a51_数组中的逆序对;
  * 例：输入: [7,5,6,4]  输出: 5
  * 限制：0 <= 数组长度 <= 50000
  * 提示：先写出归并排序，再在代码中添加计数代码
+ * <p>
+ * 思路：
+ * 1.常规思路（暴力解法）：两个for循环，在遍历每个元素i时，遍历他后边的元素j，如果该i>j，则count++。和冒泡排序的思想一致。这种方式超时。
+ * 2.归并排序：先不断二分再合并。设置全局变量count记录逆序对的个数，在进行合并时，需要将左右两个数组复制到一个新的数组中，如果左数组的数小于右数组的数则将
+ * 左数组的数复制到新数组中，否则将右数组的数复制到新数组中，并对count进行处理，此时此左数组的数到数组尾的所有元素都>此右数组的数，所以count=count+(l2-i)
  */
 public class Solution {
 
     public static void main(String[] args) {
-        int[] nums = {1, 3, 2, 3, 1};
+        int[] nums = {7, 5, 6, 4};
         Solution solution = new Solution();
         int res = solution.reversePairs2(nums);
+        //System.out.println(Arrays.toString(nums));
         System.out.println("res = " + res);
     }
 
     /**
      * 归并排序
      */
-    public int reversePairs2(int[] nums) {
-        return mergeSort(nums, 0, nums.length - 1);
-    }
-
     //统计逆序对数
     int count = 0;
 
+    public int reversePairs2(int[] nums) {
+        mergeSort(nums, 0, nums.length - 1);
+        return count;
+    }
+
     //归并排序
-    private int mergeSort(int[] nums, int l, int r) {
+    private void mergeSort(int[] nums, int l, int r) {
         if (l < r) {
             int mid = (r - l) / 2 + l;
             //向左递归，统计左边的逆序对数
-            mergeSort(nums, 0, mid);
+            mergeSort(nums, l, mid);
             //向右递归，统计右边的逆序对数
             mergeSort(nums, mid + 1, r);
             //合并，统计整体的逆序对数
             merge(nums, l, mid, mid + 1, r);
-            return this.count;
+            //return this.count;
         }
-        return 0;
+        //return 0;
     }
 
     //合并
@@ -52,8 +59,8 @@ public class Solution {
             if (nums[i] <= nums[j]) {
                 temp[t++] = nums[i++];
             } else {
-                //统计逆序对数,当左边的数大于右边的数时，则这个数到中间位置的数的个数即为逆序对数
-                count += j - i;
+                //统计逆序对数,当左边的数大于右边的数时，则这个数到左数组尾的数(都大于nums[j])的个数即为逆序对数
+                count += l2 - i;//!!!!!!!!!!!!
                 temp[t++] = nums[j++];
             }
         }
@@ -65,9 +72,8 @@ public class Solution {
             temp[t++] = nums[j++];
         }
         //复制到原数组的对应位置
-        t = 0;
-        while (l1 <= r2) {
-            nums[l1++] = temp[t++];
+        for (int k = 0; k < temp.length; k++) {
+            nums[l1 + k] = temp[k];
         }
     }
 
