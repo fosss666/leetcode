@@ -10,6 +10,10 @@ package com.fosss.a53_1_在排序数组中查找数字出现的次数;
  * -10^9<= nums[i]<= 10^9
  * nums是一个非递减数组
  * -10^9<= target<= 10^9
+ *
+ * 思路：
+ * 1.遍历找到目标值，记录个数
+ * 2.先二分查找到要找的那个值的下标，再向左向右找相同的值
  */
 public class Solution {
 
@@ -61,6 +65,21 @@ public class Solution {
         }
         //数组中没有该目标值
         return -1;
+    }
+
+    /**
+     * 遍历查找，100%  63%
+     */
+    public int search3(int[] nums, int target) {
+        int count=0;
+        for(int num: nums){
+            if(num==target){
+                count++;
+            }else if(num>target){
+                break;
+            }
+        }
+        return count;
     }
 }
 
