@@ -1,8 +1,9 @@
 package com.fosss.a55_1_二叉树的深度;
 
-import sun.reflect.generics.tree.Tree;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 /**
  * @author fosss
@@ -10,6 +11,16 @@ import java.util.*;
  * @description： 输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度
  * 例：给定二叉树 [3,9,20,null,null,15,7] 返回最大深度3
  * 提示：节点总数 <= 10000
+ * <p>
+ * 思路：
+ * 1.深度优先：
+ * ① 以root==null为递归结束条件，返回0
+ * ② 依次调用左子树递归和右子树递归，每次递归深度+1，返回较大的那个
+ * 2.广度优先：
+ * ① 创建记录深度的变量depth，初始化为0，对root进行非空判断，为空直接返回depth；
+ * ② 利用队列记录每一层的节点，第一层放入root；
+ * ③ 以队列不为空为while循环条件，每一个while循环代表一层，depth++，记录此时队列长度，遍历并将子树（下一层）加入队列；
+ * ④ 循环结束后返回depth。
  */
 public class Solution {
 
@@ -61,7 +72,7 @@ public class Solution {
      */
     public int maxDepth2(TreeNode root) {
 
-        return root == null ? 0 : Math.max(maxDepth2(root.left), maxDepth2(root.right)) + 1;
+        return root == null ? 0 : Math.max(maxDepth2(root.left) + 1, maxDepth2(root.right) + 1);
 
 /*        if (root == null) {
             return 0;
