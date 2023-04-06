@@ -9,6 +9,10 @@ import java.util.*;
  * 复杂度是O(1)
  * 例：输入：nums = [4,1,4,6] 输出：[1,6] 或 [6,1]
  * 限制：2 <= nums.length <= 10000
+ * <p>
+ * 思路：
+ * 常用方式哈希表或先排序再寻找都不符合空间复杂度
+ * 位运算：见注释
  */
 public class Solution {
 
@@ -33,7 +37,7 @@ public class Solution {
         //我们根据异或的性质可以知道：z中至少有一位是1，否则x与y就是相等的。
         //我们通过一个辅助变量m来保存z中哪一位为1.（可能有多个位都为1，我们找到最低位的1即可）。
         //举个例子：z = 10 ^ 2 = 1010 ^ 0010 = 1000,第四位为1.
-        //我们将m初始化为1，如果（z & m）的结果等于0说明z的最低为是0
+        //我们将m初始化为1，如果（z & m）的结果等于0说明z的最低位是0
         //我们每次将m左移一位然后跟z做与操作，直到结果不为0.
         //此时m应该等于1000，同z一样，第四位为1.
         int m = 1;
@@ -50,6 +54,7 @@ public class Solution {
         for (int num : nums) {
             //这里我们是通过if...else将nums分为了两组，一边遍历一遍异或。
             //跟我们创建俩数组nums1和nums2原理是一样的。
+            //注意根据(num & m)与0的关系进行分组
             if ((num & m) == 0) {
                 x ^= num;
             } else {
@@ -63,6 +68,25 @@ public class Solution {
      * 自解，先排序再判断 17%  18%
      */
     public int[] singleNumbers2(int[] nums) {
+        Arrays.sort(nums);
+        int[] res = new int[2];
+        int index = 0;
+        int i = 0;
+        while (i < nums.length - 1) {
+            if (nums[i] != nums[i + 1]) {
+                res[index++] = nums[i];
+                i++;
+            } else {
+                i += 2;
+            }
+        }
+        if (res[1] == 0) {
+            res[1] = nums[nums.length - 1];
+        }
+
+        return res;
+
+        /*
         //先排序
         Arrays.sort(nums);
         List<Integer> list = new ArrayList<>();
@@ -88,11 +112,11 @@ public class Solution {
         for (int i1 = 0; i1 < list.size(); i1++) {
             res[i1] = list.get(i1);
         }
-        return res;
+        return res;*/
     }
 
     /**
-     * 自解，map, 12%  18%
+     * 自解，map, 12%  18%  不符合空间复杂度O(1)
      */
     public int[] singleNumbers(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>();
