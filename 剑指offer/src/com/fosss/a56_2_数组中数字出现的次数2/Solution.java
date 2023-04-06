@@ -10,6 +10,9 @@ import java.util.Map;
  * @description： 在一个数组 nums 中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字
  * 例：输入：nums = [3,4,3,3] 输出：4
  * 限制：1 <= nums.length <= 10000  1 <= nums[i] < 2^31
+ *
+ * 思路：
+ * 老老实实用哈希表或先排序后遍历判断,牛逼的办法看不懂
  */
 public class Solution {
 
@@ -46,7 +49,8 @@ public class Solution {
         Map<Integer, Integer> map = new HashMap<>();
         for (int num : nums) {
             if (map.containsKey(num)) {
-                map.put(num, map.get(num) + 1);
+                //map.put(num, map.get(num) + 1);
+                map.put(num, -1);
             } else {
                 map.put(num, 1);
             }
