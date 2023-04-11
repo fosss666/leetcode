@@ -10,6 +10,10 @@ import java.util.Set;
  * @description： 输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。如果有多对数字的和等于s，则输出任意一对即可
  * 例：输入：nums = [2,7,11,15], target = 9 输出：[2,7] 或者 [7,2]
  * 限制：1 <= nums.length <= 10^5  1 <= nums[i] <= 10^6
+ * <p>
+ * 思路：
+ * 1.利用HashSet：set中存储target-num，遍历数组，如果当前元素在set中存在的话，说明找到和为target的两个数；不存在的话，将该数存入set
+ * 2.该数组递增排序，所以可以利用左右两个指针的方法：定义两个变量记录左右边界，判断左右的和与target的关系。<则left++；>则right--；=则返回
  */
 public class Solution {
 
@@ -21,7 +25,7 @@ public class Solution {
     }
 
     /**
-     * 双指针  48%  41%
+     * 双指针  99%  70%
      */
     public int[] twoSum3(int[] nums, int target) {
         int left = 0, right = nums.length - 1;
