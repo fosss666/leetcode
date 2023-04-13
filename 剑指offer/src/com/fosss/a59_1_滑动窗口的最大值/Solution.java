@@ -21,6 +21,9 @@ import java.util.*;
  * 1  3  -1  -3 [5  3  6] 7       6
  * 1  3  -1  -3  5 [3  6  7]      7
  * 提示：你可以假设 k 总是有效的，在输入数组 不为空 的情况下，1 ≤ k ≤ nums.length
+ * <p>
+ * 思路：
+ * 借助LinkedList能够对首尾的元素进行处理的特性，LinkedList中存储数组下标，对每个窗口较大值的下标进行存储，队头为最大值，如果队头不在窗口内则需要删除
  */
 public class Solution {
 
@@ -69,7 +72,6 @@ public class Solution {
             return nums;
         }
         int[] res = new int[nums.length - k + 1];
-        int m = 0;
         //队列中存放下标，目的是判断队头是否再窗口内
         LinkedList<Integer> queue = new LinkedList<>();
         //遍历数组
@@ -79,9 +81,10 @@ public class Solution {
                 queue.pollLast();
             }
             //新元素入队
-            queue.add(i);
+            queue.addLast(i);
 
             //队头是最大值的下标，需要先判断队头是否在窗口内  这里是关键！！  i- queue.peek()>=k
+            //每次只会添加一个元素，所以最多只有一个元素在窗口外，所以用if就可以
             if (i - queue.peek() >= k) {
                 //说明队头不在窗口内，则先将其剔除
                 queue.poll();
@@ -90,7 +93,7 @@ public class Solution {
             //此时队头就是窗口最大元素的下标了
             //注意i要大于等于k-1后才开始添加结果值
             if (i >= k - 1) {
-                res[m++] = nums[queue.peek()];
+                res[i - k + 1] = nums[queue.peek()];
             }
         }
 
