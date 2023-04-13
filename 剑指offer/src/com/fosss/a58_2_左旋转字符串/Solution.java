@@ -10,6 +10,9 @@ package com.fosss.a58_2_左旋转字符串;
  * 限制：1 <= k < s.length <= 10000
  * 思考：
  * String的substring方法底层是new String(value, beginIndex, subLen) 新建字符串
+ *
+ * 思路：
+ * 字符串拼接，substring或StringBuilder.append()
  */
 public class Solution {
 
