@@ -16,6 +16,12 @@ import java.util.TreeMap;
  * [[],[1],[2],[],[],[]]
  * 输出:[null,null,null,2,1,2]
  * 限制：1 <= push_back,pop_front,max_value的总操作数 <= 10000  1 <= value <= 10^5
+ * <p>
+ * 思路：
+ * 误解：利用队列和TreeMap(key有序)，入队列时同时放入map,value表示key的个数；出队列时key对应的value--；求最大值时需要遍历map返回第一个value不为0的key，
+ * 这时的时间复杂度就不是O(1)了，此方法行不通。
+ * 正解：两个LinkedList，其中一个res用来正常存储值，一个max用来记录较大的值，max的队列头存储max_value。入队列时先放入res,在放入max之前，先将max的尾部小于value的弹出，再存入尾部。
+ * 出队列时，要判断弹出的值是否和max的队头相等，相等则max弹出队头。
  */
 public class MaxQueue {
 
