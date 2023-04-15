@@ -13,6 +13,11 @@ import java.util.Set;
  * 示例：输入: [1,2,3,4,5]   输出: True
  * 限制：数组长度为 5    数组的数取值为 [0, 13]
  * 解题思路：此5张牌是顺子的充分条件是：1.除大小王外，所有牌无重复 2.设此5张牌中最大的牌为max,最小的牌为min(大小王除外)，则需满足：max-min<5
+ * <p>
+ * 思路：
+ * 按照这个条件进行求解：1.除大小王外，所有牌无重复 2.设此5张牌中最大的牌为max,最小的牌为min(大小王除外)，则需满足：max-min<5
+ * 1.先从小到大排序，在遍历对上面两个条件进行判断，注意最小值不一定是数组的第一个值，因为可能为0，所以最小值为第一个不为0的值
+ * 2.不排序直接遍历，记录最大值和最小值在最后判断差，用set判断是否有不为0的重复
  */
 public class Solution {
 
@@ -46,8 +51,8 @@ public class Solution {
             } else if (set.contains(num)) {
                 return false;
             }
-            min = Math.min(num, min);
-            max = Math.max(num, max);
+            min = num < min && num != 0 ? num : min;
+            max = num > max && num != 0 ? num : max;
         }
         return max - min < 5;
     }
