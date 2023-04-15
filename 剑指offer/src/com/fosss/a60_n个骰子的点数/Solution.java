@@ -12,12 +12,19 @@ import java.util.Arrays;
  * 限制：1 <= n <= 11
  * 分析：
  * n个骰子有(6*n-n+1)种可能情况
+ * <p>
+ * 思路：动态规划
+ * 1.二维数组dp[i][j],表示有i个骰子时，和为j的总可能情况，初始化dp[1][j]=1,表示一个骰子时每种可能和都只有1中可能组合。对i=2~n个骰子进行遍历，对可能和j=
+ * i~6*n进行遍历，对每个骰子的可能值k=1~6进行遍历，j-k<1时break，设置第i个骰子和为j的可能组合数dp[i][j]=dp[i][j]+dp[i-1][j-k]，三层循环结束后将第n
+ * 个骰子的每种可能除以6^n后即为比例，存入res数组返回。
+ * 2.使用一维数组对空间复杂度进行优化，dp[i]表示和为i的组合数，初始化dp数组大小为7，和为1~6的组合数为1，没增加一个骰子，就要重新设定dp数组的长度，所以用临时
+ * 变量temp来创建新的dp数组，该循环的最后在赋值给dp,比使用二维数组多了个j-k>=dp.length时，continue。
  */
 public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        double[] res = solution.dicesProbability2(2);
+        double[] res = solution.dicesProbability(1);
         System.out.println("res = " + Arrays.toString(res));
     }
 
