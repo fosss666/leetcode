@@ -15,6 +15,10 @@ package com.fosss.a63_股票的最大利润;
  * 输出: 0
  * 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。
  * 限制：0 <= 数组长度 <= 10^5
+ * <p>
+ * 思路：
+ * 1.while循环遍历数据，先定位到左比右大的位置，再更新差最大值
+ * 2.动态规划，思路同1，也是找最小值和差最大值，更简便
  */
 public class Solution {
     public static void main(String[] args) {
@@ -49,7 +53,7 @@ public class Solution {
         int i = 0, j = 1;
         int max = 0;
         while (j < prices.length) {
-            //找到右比左小的地方
+            //找到右比左大的地方
             while (j < prices.length && prices[j] - prices[i] < 0) {
                 //prices[j]比prices[i]小，则prices[j]小
                 i = j;

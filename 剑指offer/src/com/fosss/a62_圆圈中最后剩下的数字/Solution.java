@@ -103,7 +103,7 @@ public class Solution {
         while (list.size() > 1) {
             index = (index + m - 1) % list.size();
             list.remove(index);
-            //防止删除的是最后一个元素
+
         }
         return list.get(0);
 
