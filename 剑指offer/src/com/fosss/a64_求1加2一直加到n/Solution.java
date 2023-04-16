@@ -7,6 +7,9 @@ package com.fosss.a64_求1加2一直加到n;
  * Description: 求 1+2+...+n ，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C)
  * 示例：输入: n = 3  输出: 6
  * 限制：1 <= n <= 10000
+ * <p>
+ * 思路：
+ * 利用递归，并以&&来作为递归退出条件（代替if）
  */
 public class Solution {
 
@@ -21,6 +24,25 @@ public class Solution {
      * if(A && B)  // 若 A 为 false ，则 B 的判断不会执行（即短路），直接判定 A && B 为 false
      * if(A || B) // 若 A 为 true ，则 B 的判断不会执行（即短路），直接判定 A || B 为 true
      * n > 1 && sumNums(n - 1) // 当 n = 1 时 n > 1 不成立 ，此时 “短路” ，终止后续递归
+     */
+
+    /**
+     * 一
+     */
+    int sum = 0;
+
+    public int sumNums3(int n) {
+        recur(n);
+        return sum;
+    }
+
+    private boolean recur(int n) {
+        sum += n;
+        return n > 0 && sumNums(--n) > 0;
+    }
+
+    /**
+     * 二
      */
     int res = 0;
 
