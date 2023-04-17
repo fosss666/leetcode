@@ -18,6 +18,10 @@ package com.fosss.a67_把字符串转换成整数;
  * 解释: 转换截止于数字 '3' ，因为它的下一个字符不为数字。
  * 示例3：输入: "-91283472332" 输出: -2147483648
  * 解释: 数字 "-91283472332" 超过 32 位有符号整数范围。因此返回 INT_MIN (−231) 。
+ * <p>
+ * 思路：
+ * 1.遍历判断，相当于面向测试编程
+ * 2.巧妙地对是否越界进行判断
  */
 public class Solution {
 
@@ -38,7 +42,7 @@ public class Solution {
         if (c.length == 0) {
             return 0;
         }
-        //bndry为
+        //bndry为数字拼接边界
         int res = 0, bndry = Integer.MAX_VALUE / 10;
         //sign用来标记符号，i用来表示第一个字符是不是符号
         int i = 1, sign = 1;
@@ -53,14 +57,14 @@ public class Solution {
             if (c[j] < '0' || c[j] > '9') {
                 break;
             }
-            //判断是否越界
+            //判断是否越界！！！！！！！！
             //越界情况：（数字拼接边界bndry=2147483647/10=214748364
             //1.res>bndry   执行拼接10*res>=2147483650越界
             //2.res=bndry,x>7   拼接后是2147483648或2147483649越界
             if (res > bndry || res == bndry && c[j] > '7') {
                 return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
             }
-            //拼接数字
+            //拼接数字！！！
             res = res * 10 + (c[j] - '0');
         }
         return sign * res;
@@ -71,6 +75,47 @@ public class Solution {
      * 自解  面向测试编程   20%  35%
      */
     public int strToInt(String str) {
+
+        char[] cs = str.trim().toCharArray();
+        if (cs.length == 0) {
+            return 0;
+        }
+        char c = cs[0];
+        int start = 0;
+        if (c == '+' || c == '-') {
+            //防止只有一个字符或连续两个字符
+            if (cs.length == 1 || cs[1] < '0' || cs[1] > '9') {
+                return 0;
+            }
+            start = 1;
+        } else if (c < '0' || c > '9') {
+            return 0;
+        }
+        String s = "";
+        for (int i = start; i < cs.length; i++) {
+            if (cs[i] < '0' || cs[i] > '9') {
+                break;
+            }
+            s += cs[i];
+        }
+        //现在的问题是处理越界的数
+        //去掉前边没用的0
+        int index = 0;
+        while (index < s.length() && s.charAt(index) == '0') {
+            index++;
+        }
+        s = s.substring(index);
+        //健壮性判断
+        if (s.length() == 0) {
+            return 0;
+        }
+        if (s.length() > String.valueOf(Integer.MAX_VALUE).length() || Long.parseLong(s) > Integer.MAX_VALUE) {
+            return start == 0 || cs[0] == '+' ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+        }
+        int res = start == 0 || cs[0] == '+' ? Integer.parseInt(s) : -Integer.parseInt(s);
+        return res;
+
+        /*
         //去除开头空格
         str = str.trim();
         if (str.length() == 0) {
@@ -96,6 +141,7 @@ public class Solution {
             str = str.substring(1);
 
         }
+        //健壮性判断
         if (str.length() == 0) {
             return 0;
         }
@@ -122,6 +168,7 @@ public class Solution {
             int res = Integer.parseInt(s);
             return symbol == '+' ? res : -res;
         }
+        */
     }
 }
 
