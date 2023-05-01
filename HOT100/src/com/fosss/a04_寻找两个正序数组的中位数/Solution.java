@@ -26,7 +26,7 @@ public class Solution {
     }
 
     /**
-     * 时间复杂度为O(m+n)
+     * 合并数组，时间复杂度为O(m+n)
      */
     public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int[] arr = new int[nums1.length + nums2.length];
