@@ -33,6 +33,7 @@ public class B02_BinaryInsertSort {
             //将哨兵放到应该插入的位置
             arr[right + 1] = arr[0];
         }
+
     }
 }
 
