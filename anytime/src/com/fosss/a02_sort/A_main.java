@@ -21,11 +21,19 @@ public class A_main {
         arr[8] = 11;
         System.out.println("原数组：");
         print(arr);
+        System.out.println("排序后的数组：");
         //调用排序算法
 
-        //1.直接插入排序
-        B01_InsertSort.insertSort(arr);
-        System.out.println("排序后的数组：");
+        /**
+         *  1.直接插入排序
+         */
+        //B01_InsertSort.insertSort(arr);
+        //print(arr);
+
+        /**
+         * 2.折半插入排序
+         */
+        B02_BinaryInsertSort.binaryInsertSort(arr);
         print(arr);
 
     }

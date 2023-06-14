@@ -6,6 +6,8 @@ package com.fosss.a02_sort;
  * Time: 19:43
  * Description:直接插入排序
  * 从第一个数开始，假定他为有序数组，从下一个数开始向这个有序数组中选择合适位置插入
+ * 最好情况下每趟只需要比较1次，即原数组有序，总比较次数为n-1
+ * 时间复杂度O(n^2) 空间复杂度O(1) 稳定
  */
 public class B01_InsertSort {
     /**
