@@ -33,13 +33,7 @@ public class A_main {
         /**
          * 2.折半插入排序
          */
-        //B02_BinaryInsertSort.binaryInsertSort(arr);
-        //print(arr);
-
-        /**
-         * 3.希尔排序
-         */
-        B03_ShellSort.shellSort(arr);
+        B02_BinaryInsertSort.binaryInsertSort(arr);
         print(arr);
 
     }
