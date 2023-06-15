@@ -5,6 +5,7 @@ package com.fosss.a02_sort;
  * Date: 2023/6/15
  * Time: 9:53
  * Description:冒泡排序-两层for循环
+ * 时间复杂度O(n^2) 空间复杂度O(1) 稳定
  */
 public class B04_1_BubbleSort_2for {
     /**

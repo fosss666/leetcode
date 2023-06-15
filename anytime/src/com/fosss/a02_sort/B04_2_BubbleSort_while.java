@@ -5,6 +5,7 @@ package com.fosss.a02_sort;
  * Date: 2023/6/15
  * Time: 10:08
  * Description: 冒泡排序-while循环
+ * 复杂度同上
  */
 public class B04_2_BubbleSort_while {
     /**
