@@ -19,15 +19,17 @@ public class B01_InsertSort {
 
             //设置哨兵为要向有序数组中插入的数
             arr[0] = arr[i];
-            for (int j = i - 1; j >= 0; j--) {
+            int j;
+            //寻找应该插入的位置
+            for (j = i - 1; j >= 1; j--) {
                 if (arr[0] < arr[j]) {
                     //向后移动
                     arr[j + 1] = arr[j];
                 } else {
-                    arr[j + 1] = arr[0];
                     break;//退出循环
                 }
             }
+            arr[j + 1] = arr[0];
 
         }
     }

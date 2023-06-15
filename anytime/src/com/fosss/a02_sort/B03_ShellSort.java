@@ -6,6 +6,7 @@ package com.fosss.a02_sort;
  * Time: 21:11
  * Description:希尔排序
  * 插入排序在序列基本有序时效率较高，希尔排序就是插入排序的优化，先将序列按照一定增量进行分组（每相隔一定值的数为一组），这个增量不断缩小
+ * 空间复杂度O(1)  不稳定
  */
 public class B03_ShellSort {
     /**

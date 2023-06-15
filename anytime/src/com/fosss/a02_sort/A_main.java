@@ -39,7 +39,14 @@ public class A_main {
         /**
          * 3.希尔排序
          */
-        B03_ShellSort.shellSort(arr);
+        //B03_ShellSort.shellSort(arr);
+        //print(arr);
+
+        /**
+         * 4.冒泡排序
+         */
+        //B04_1_BubbleSort_2for.bubbleSort(arr);
+        B04_2_BubbleSort_while.bubbleSort(arr);
         print(arr);
 
     }
