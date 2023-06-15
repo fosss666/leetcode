@@ -64,7 +64,13 @@ public class A_main {
         /**
          * 7.堆排序
          */
-        B07_HeapSort.heapSort(arr);
+        //B07_HeapSort.heapSort(arr);
+        //print(arr);
+
+        /**
+         * 8.归并排序
+         */
+        B08_MergeSort.mergeSort(arr);
         print(arr);
 
     }
