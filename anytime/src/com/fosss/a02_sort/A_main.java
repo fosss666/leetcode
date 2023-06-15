@@ -70,7 +70,13 @@ public class A_main {
         /**
          * 8.归并排序
          */
-        B08_MergeSort.mergeSort(arr);
+        //B08_MergeSort.mergeSort(arr);
+        //print(arr);
+
+        /**
+         * 9.基数排序
+         */
+        B09_CardinalitySort.cardinalitySort(arr);
         print(arr);
 
     }
