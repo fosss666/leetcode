@@ -50,15 +50,21 @@ public class A_main {
         //print(arr);
 
         /**
-         * 快速排序
+         * 5.快速排序
          */
         //B05_QuickSort.quickSort(arr);
         //print(arr);
 
         /**
-         * 简单选择排序
+         * 6.简单选择排序
          */
-        B06_SelectSort.selectSort(arr);
+        //B06_SelectSort.selectSort(arr);
+        //print(arr);
+
+        /**
+         * 7.堆排序
+         */
+        B07_HeapSort.heapSort(arr);
         print(arr);
 
     }
