@@ -52,7 +52,13 @@ public class A_main {
         /**
          * 快速排序
          */
-        B05_QuickSort.quickSort(arr);
+        //B05_QuickSort.quickSort(arr);
+        //print(arr);
+
+        /**
+         * 简单选择排序
+         */
+        B06_SelectSort.selectSort(arr);
         print(arr);
 
     }

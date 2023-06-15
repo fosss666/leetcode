@@ -5,7 +5,7 @@ package com.fosss.a02_sort;
  * Date: 2023/6/15
  * Time: 10:22
  * Description: 快速排序
- * 时间复杂度O(n*以2为底n的对数) 空间复杂度O(以2为底n的对数)
+ * 时间复杂度O(n*以2为底n的对数) 空间复杂度O(以2为底n的对数) 不稳定
  */
 public class B05_QuickSort {
     /**
