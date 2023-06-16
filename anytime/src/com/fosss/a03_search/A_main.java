@@ -21,8 +21,8 @@ public class A_main {
         /**
          * 折半查找
          */
-        int i = B02_BinarySearch.binarySearch_while(arr, value);
-
+        //int i = B02_BinarySearch.binarySearch_while(arr, value);
+        int i = B02_BinarySearch.binarySearch_recursion(arr, value);
 
         System.out.println("i = " + i);
     }

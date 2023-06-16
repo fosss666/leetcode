@@ -28,4 +28,28 @@ public class B02_BinarySearch {
         //找不到返回-1
         return -1;
     }
+
+    /**
+     * 递归实现
+     */
+    public static int binarySearch_recursion(int[] arr, int value) {
+        return recursion(arr, value, 1, arr.length - 1);
+    }
+
+    private static int recursion(int[] arr, int value, int left, int right) {
+        if (left > right) {
+            return -1;
+        }
+        int mid = (right - left) / 2 + left;
+        if (value == arr[mid]) {
+            return mid;
+        } else if (value < arr[mid]) {
+            //向左查找
+            return recursion(arr, value, left, mid - 1);
+        } else {
+            //向右查找
+            return recursion(arr, value, mid + 1, right);
+        }
+    }
+
 }
