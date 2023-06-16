@@ -10,12 +10,20 @@ public class A_main {
 
     public static void main(String[] args) {
         //从下标为1开始存储数据
-        int[] arr = {0, 1, 4, 2, 4, 9, 43, 34};
+        int[] arr = {0, 1, 2, 4, 9, 34, 43};
         int value = 9;
 
-        //1.顺序查找
-        int i = B01_SequentialSearch.sequentialSearch(arr, value);
-        System.out.println("i = " + i);
+        /**
+         * 1.顺序查找
+         */
+        //int i = B01_SequentialSearch.sequentialSearch(arr, value);
 
+        /**
+         * 折半查找
+         */
+        int i = B02_BinarySearch.binarySearch_while(arr, value);
+
+
+        System.out.println("i = " + i);
     }
 }

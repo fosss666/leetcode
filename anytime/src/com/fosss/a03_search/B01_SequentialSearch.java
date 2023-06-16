@@ -11,6 +11,9 @@ public class B01_SequentialSearch {
         //下标为0处为哨兵
         arr[0] = value;
         int i;
+        /**
+         * 这样只能查找value必须在数组中
+         */
         for (i = 1; arr[i] != arr[0]; i++) ;
         return i;
     }
