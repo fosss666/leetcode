@@ -22,7 +22,10 @@ public class A_main {
         Graph graph = new Graph(vertexes, adjacencyMatrix);
 
         //深度优先
-        graph.graphDfs();
+        //graph.graphDfs();
+
+        //广度优先
+        graph.graphBfs();
     }
 
 }
