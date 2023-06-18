@@ -81,19 +81,20 @@ public class Graph {
         //加入队列
         queue.add(index);
         while (!queue.isEmpty()) {
-            for (int i = queue.size(); i >= 0; i--) {
+            for (int i = queue.size(); i > 0; i--) {
                 Integer poll = queue.poll();
                 //未访问
-                if (isVisited[poll] == 0) {
+                if(isVisited[poll]==0) {
                     //设置为已访问
                     isVisited[poll] = 1;
                     //输出
                     System.out.print(vertexes[poll] + " ");
-                }
-                //将邻接点入队
-                for (int j = 0; j < adjacencyMatrix[poll].length; j++) {
-                    if (adjacencyMatrix[poll][j] == 1) {
-                        queue.add(j);
+
+                    //将未访问过的邻接点入队
+                    for (int j = 0; j < adjacencyMatrix[poll].length; j++) {
+                        if (adjacencyMatrix[poll][j] == 1 && isVisited[j] == 0) {
+                            queue.add(j);
+                        }
                     }
                 }
             }
