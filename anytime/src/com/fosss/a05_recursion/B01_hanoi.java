@@ -6,7 +6,7 @@ package com.fosss.a05_recursion;
  * Time: 19:20
  * Description:汉诺塔问题
  */
-public class B_01hanoi {
+public class B01_hanoi {
 
     public static void main(String[] args) {
         hanoi(3, 'A', 'B', 'C');
