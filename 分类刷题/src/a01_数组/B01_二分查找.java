@@ -9,7 +9,7 @@ package a01_数组;
  * <p>
  * 需要注意查找区间的开闭情况
  */
-public class b01_二分查找 {
+public class B01_二分查找 {
 
     public static void main(String[] args) {
         int[] arr = {-1, 0, 3, 5, 9, 12};
