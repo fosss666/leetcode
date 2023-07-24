@@ -27,7 +27,7 @@ public class B07_三数之和 {
         Arrays.sort(nums);
 
         for (int i = 0; i < nums.length; i++) {
-            //排序后数组从左到右递增，只有nums[i]<小于零才可能出现符合条件的三数
+            //（剪枝）排序后数组从左到右递增，只有nums[i]<小于零才可能出现符合条件的三数
             if (nums[i] > 0) {
                 break;
             }
@@ -55,7 +55,7 @@ public class B07_三数之和 {
                     while (left < right && nums[right - 1] == nums[right]) {
                         right--;
                     }
-                    //两边收缩
+                    //两边收缩------为了不死循环！！！！！！
                     left++;
                     right--;
                 } else if (sum < 0) {
