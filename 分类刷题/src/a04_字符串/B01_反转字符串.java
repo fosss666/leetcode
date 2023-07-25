@@ -15,7 +15,7 @@ package a04_字符串;
  * 输入：["H","a","n","n","a","h"]
  * 输出：["h","a","n","n","a","H"]
  */
-public class B05_反转字符串 {
+public class B01_反转字符串 {
 
     /**
      * 双指针

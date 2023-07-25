@@ -12,7 +12,7 @@ package a04_字符串;
  * 输入: s = "abcdefg", k = 2
  * 输出: "bacdfeg"
  */
-public class B06_反转字符串2 {
+public class B02_反转字符串2 {
 
     public static void main(String[] args) {
         //String res = reverseStr("abcdefg", 2);
