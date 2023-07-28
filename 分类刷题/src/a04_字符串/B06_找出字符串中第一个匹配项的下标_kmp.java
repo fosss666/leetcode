@@ -105,7 +105,7 @@ public class B06_找出字符串中第一个匹配项的下标_kmp {
         char[] c = needle.toCharArray();
         //获取next数组
         int[] next = getNext(needle);
-        //进行匹配
+        //进行匹配 j表示needle已经和haystack匹配的长度，也表示next数组应该进行匹配的下标
         int j = 0;
         for (int i = 0; i < haystack.length(); i++) {
             while (j > 0 && s[i] != c[j]) {
