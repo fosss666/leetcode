@@ -37,7 +37,7 @@ public class B08_四数之和 {
             for (int j = i + 1; j < nums.length; j++) {
                 //二级剪枝
                 int t = nums[i] + nums[j];
-                if (t > target && t > 0) {
+                if (t > target && t >= 0) {
                     break;
                 }
                 //对nums[j]去重
