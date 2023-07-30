@@ -12,6 +12,22 @@ package a05_双指针法;
 public class B04_反转链表 {
 
     /**
+     * 依照双指针法编写递归法
+     */
+    public ListNode reverseList2(ListNode head) {
+        return recursion(null, head);
+    }
+
+    private ListNode recursion(ListNode pre, ListNode cur) {
+        if (cur == null) {
+            return pre;
+        }
+        ListNode temp = cur.next;
+        cur.next = pre;
+        return recursion(cur, temp);
+    }
+
+    /**
      * 前驱指针和当前指针
      */
     public ListNode reverseList(ListNode head) {
