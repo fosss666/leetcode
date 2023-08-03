@@ -1,4 +1,4 @@
-package a07_二叉树.b04_二叉树的层序遍历;
+package a07_二叉树;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -10,7 +10,7 @@ import java.util.Queue;
  * Description:
  * 给定一个二叉树，检查它是否是镜像对称的。
  */
-public class B05_对称二叉树 {
+public class B06_对称二叉树 {
 
     /**
      * 队列或栈

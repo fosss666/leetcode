@@ -1,4 +1,4 @@
-package a07_二叉树.b04_二叉树的层序遍历;
+package a07_二叉树;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -11,7 +11,7 @@ import java.util.Stack;
  * Description:
  * 翻转一棵二叉树。
  */
-public class B04_反转二叉树 {
+public class B05_反转二叉树 {
 
     /**
      * 前序遍历-迭代法统一写法
