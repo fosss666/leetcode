@@ -31,7 +31,7 @@ public class B04_二叉树的层平均值 {
 
         while (!queue.isEmpty()) {
             int size = queue.size();
-            Double sum = 0.0;
+            double sum = 0.0;
             for (int i = 0; i < size; i++) {
                 TreeNode node = queue.poll();
                 sum += node.val;
