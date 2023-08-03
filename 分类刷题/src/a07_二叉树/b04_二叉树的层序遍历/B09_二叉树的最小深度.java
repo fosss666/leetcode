@@ -14,7 +14,31 @@ import java.util.Queue;
 public class B09_二叉树的最小深度 {
 
     /**
-     * 层序遍历法，递归法在下面再遇到这个题时再写
+     * 递归法
+     */
+    public int minDepth2(TreeNode root) {
+        if (root == null) return 0;
+        int left = minDepth2(root.left);
+        int right = minDepth2(root.right);
+
+        //精简一下，当左为空或右为空时，为空的那个的深度为0，所以用left+right+1可以表示某一个的深度+1
+        //如果左子树为空，右子树不为空，说明最小深度是 1 + 右子树的深度。
+        //反之，右子树为空，左子树不为空，最小深度是 1 + 左子树的深度。
+        //最后如果左右子树都不为空，返回左右子树深度最小值 + 1
+        return (root.left == null || root.right == null) ? left + right + 1 : Math.min(left, right) + 1;
+
+        /*
+        //如果左子树为空，右子树不为空，说明最小深度是 1 + 右子树的深度。
+        //反之，右子树为空，左子树不为空，最小深度是 1 + 左子树的深度。
+        if (root.left == null && root.right != null) return right + 1;
+        if (root.right == null && root.left != null) return left + 1;
+        //最后如果左右子树都不为空，返回左右子树深度最小值 + 1
+        return Math.min(left, right) + 1;
+        */
+    }
+
+    /**
+     * 层序遍历法
      */
     public int minDepth(TreeNode root) {
         if (root == null) return 0;
