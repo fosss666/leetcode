@@ -46,7 +46,6 @@ public class B15_从中序与后序遍历序列构造二叉树 {
 
         //分割后序数组
         int leftSize = inorderLeftEnd - inorderLeftBegin + 1;
-        int rightSize = inorderRightEnd = inorderRightBegin + 1;
 
         int postorderLeftBegin = postorderBegin;
         int postorderLeftEnd = postorderLeftBegin + leftSize - 1;
