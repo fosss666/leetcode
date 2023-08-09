@@ -71,6 +71,26 @@ public class B18_合并二叉树 {
      * 前序遍历，先构建根结点，再构建左右子树
      */
     public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+        if (root1 == null && root2 == null) return null;
+        //创建结点
+        TreeNode root;
+        if (root1 == null) {
+            root = root2;
+        } else if (root2 == null) {
+            root = root1;
+        } else {
+            root = new TreeNode(root1.val + root2.val);
+        }
+
+        //构建左右子树
+        //注意避免root1、root2为空的情况（空指针），取不到left和right
+        root.left = mergeTrees(root1 == null ? null : root1.left, root2 == null ? null : root2.left);
+        root.right = mergeTrees(root1 == null ? null : root1.right, root2 == null ? null : root2.right);
+
+        return root;
+    }
+    /*
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
         return buildTree(root1, root2);
     }
 
@@ -93,6 +113,8 @@ public class B18_合并二叉树 {
 
         return root;
     }
+
+     */
 }
 
 
