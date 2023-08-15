@@ -50,8 +50,6 @@ public class B11_全排列 {
      * 直接用path的内置方法判断是否使用过
      */
     public List<List<Integer>> permute(int[] nums) {
-        //used用来记录数组每个位置的元素是否被使用
-        boolean[] used = new boolean[nums.length];
         backtracking(nums);
         return res;
     }
