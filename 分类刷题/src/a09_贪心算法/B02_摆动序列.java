@@ -25,6 +25,7 @@ public class B02_摆动序列 {
 
     /**
      * 贪心
+     * 关键在于满足什么条件时增加count
      */
     public int wiggleMaxLength(int[] nums) {
         //处理数组长度小于2的情况
@@ -48,4 +49,44 @@ public class B02_摆动序列 {
         return count;
     }
 
+    /**
+     * 动态规划
+     * 对于每个位置（i），从0开始递推i分别作为波峰和波谷时摆动序列的最大长度，嵌套for
+     */
+    public int wiggleMaxLength2(int[] nums) {
+        //dp[i][0]：i为波峰时摆动序列长度
+        //dp[i][1]：i为波谷时摆动序列长度
+        int[][] dp = new int[nums.length][2];
+        //初始化0处为波峰
+        dp[0][0] = 1;
+        //初始化0处为波谷
+        dp[0][1] = 1;
+        for (int i = 1; i < nums.length; i++) {
+            //i自己可以为波峰或波谷
+            dp[i][0] = dp[i][1] = 1;
+            //从j到i去递推i为波峰和波谷两种情况分别的摆动序列的长度
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    //i为波峰，dp[j][1]+1表示将i与j为波谷的序列连接起来形成新的摆动序列后的长度
+                    dp[i][0] = Math.max(dp[i][0], dp[j][1] + 1);
+                }
+                if (nums[i] < nums[j]) {
+                    //i为波谷,dp[j][0]+1表示将i与j为波峰的序列连接起来去程新的序列后的长度
+                    dp[i][1] = Math.max(dp[i][1], dp[j][0] + 1);
+                }
+            }
+        }
+        return Math.max(dp[nums.length - 1][0], dp[nums.length - 1][1]);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
