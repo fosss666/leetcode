@@ -18,7 +18,7 @@ public class B06_跳跃游戏2 {
 
     /**
      * 在一步距离内（[i~curDistance]）对每个i寻找下一步可以覆盖的最大距离（i+nums[i]）。
-     * 每走完一步（i==curDistance），步数+1，判断最大覆盖距离是否达到数组长度
+     *（i==curDistance）表示需要走一步，步数+1，判断最大覆盖距离是否达到数组长度
      */
     public int jump(int[] nums) {
         //起始位置为nums[0]，如果数组只有一个元素，则不需要跳跃。返回0步
@@ -31,7 +31,7 @@ public class B06_跳跃游戏2 {
         for (int i = 0; i < nums.length; i++) {
             //更新下一步可以覆盖的最大距离
             nextDistance = Math.max(nextDistance, i + nums[i]);
-            //查询完[i~curDistance]后，相当于走完了一步，steps++。判断nextDistance是否能走完，能则退出循环。更新当前可以覆盖的距离为
+            //查询完[i~curDistance]后，相当于需要再走一步，steps++。判断nextDistance是否能走完，能则退出循环。更新当前可以覆盖的距离为
             //nextDistance，从而进行下一轮循环
             if (i == curDistance) {
                 steps++;
