@@ -30,15 +30,31 @@ public class B13_无重叠区间 {
      */
     public int eraseOverlapIntervals(int[][] intervals) {
         //先按照左边界从小到大排序
-        Arrays.sort(intervals,(a, b)->Integer.compare(a[0],b[0]));
-        int res=0;
-        for(int i=1;i<intervals.length;i++){
-            if(intervals[i][0]<intervals[i-1][1]){
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+        int res = 0;
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] < intervals[i - 1][1]) {
                 //i和i-1有重叠，去重叠数+1，取右边界小的那个
                 res++;
-                intervals[i][1]=Math.min(intervals[i][1],intervals[i-1][1]);
+                intervals[i][1] = Math.min(intervals[i][1], intervals[i - 1][1]);
             }
         }
         return res;
+    }
+
+    /**
+     * 不修改原数组（不动intervals[i][1]）
+     */
+    public int eraseOverlapIntervals2(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+        int remove = 0;
+        int pre = intervals[0][1];
+        for (int i = 1; i < intervals.length; i++) {
+            if (pre > intervals[i][0]) {
+                remove++;
+                pre = Math.min(pre, intervals[i][1]);
+            } else pre = intervals[i][1];
+        }
+        return remove;
     }
 }
