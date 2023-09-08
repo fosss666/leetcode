@@ -20,8 +20,8 @@ public class B09_01背包_滚动数组实现 {
 
     /**
      * 二维数组的递推公式：dp[i][j]=Math.max( dp[i-1][j], value[i] + dp[i-1][j-weight[i]] )
-     * 由公式可以发现dp[i-1]这一行完全可以用dp[i]代替，即只保留一行数据就行，所以用一维数组代替二维数组，每遍历一个物品，就让一维数组更新为
-     * 这个物品对应的每个背包容量对应的价值, 递推公式 dp[j]=Math.max( dp[j], value[i]+dp[j-weight[i]] )
+     * 由公式可以发现dp[i-1]这一行完全可以用dp[i]代替，即只保留一行数据就行(当前循环时，dp[i]暂存的是上一循环的数据)，所以用一维数组代替二维数
+     * 组，每遍历一个物品，就让一维数组更新为这个物品对应的每个背包容量对应的价值, 递推公式 dp[j]=Math.max( dp[j], value[i]+dp[j-weight[i]] )
      */
     public int bagProblem(int[] weight, int[] value, int w) {
         //dp[j]表示背包容量为i时，背包中物品的最大价值
