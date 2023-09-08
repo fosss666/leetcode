@@ -47,7 +47,7 @@ public class B10_分割等和子集 {
         //第一个循环遍历物品
         for (int i = 0; i < nums.length; i++) {
             //第二个循环遍历背包容量，使用滚动数组记录时，应该倒序遍历(背包容量>=物品重量时才考虑是否放进背包)
-            for (int j = nums.length - 1; j >= nums[i]; j--) {
+            for (int j = dp.length - 1; j >= nums[i]; j--) {
                 dp[j] = Math.max(dp[j], nums[i] + dp[j - nums[i]]);
             }
         }
