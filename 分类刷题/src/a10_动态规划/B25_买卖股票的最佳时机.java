@@ -18,7 +18,7 @@ package a10_动态规划;
  * 输出：0
  * 解释：在这种情况下, 没有交易完成, 所以最大利润为 0。
  */
-public class B24_买卖股票的最佳时机 {
+public class B25_买卖股票的最佳时机 {
 
     /**
      * 暴力解法，找最大差值。超时。
@@ -67,5 +67,46 @@ public class B24_买卖股票的最佳时机 {
             min = Math.min(min, prices[i]);
         }
         return dp[prices.length - 1];
+    }
+
+    /**
+     * 动态规划——代码随想录版
+     */
+    public int maxProfit4(int[] prices) {
+        //dp[i][0]表示第i天持有股票所花的现金,这个钱肯定是越少越好
+        //dp[i][1]表示第i天不持有股票所得最多现金，这个钱肯定是越多越好
+        int[][] dp = new int[prices.length][2];
+        //初始化
+        dp[0][0] = prices[0];
+        dp[0][1] = 0;
+
+        for (int i = 1; i < prices.length; i++) {
+            //更新股票最低价
+            dp[i][0] = Math.min(dp[i - 1][0], prices[i]);
+            //这天卖出去得到的利润
+            dp[i][1] = Math.max(dp[i - 1][1], prices[i] - dp[i - 1][0]);
+        }
+        return dp[prices.length - 1][1];
+    }
+
+    /**
+     * 空间优化
+     * 行数只有两个值实际有用dp[i][]和dp[i-1][]，用长度为2的一维数组优化，然而又可以用两个正数变量代替，所以改着改着又变成贪心的代码了
+     */
+    public int maxProfit5(int[] prices) {
+        //dp[i][0]表示第i天持有股票所花的现金,这个钱肯定是越少越好
+        //dp[i][1]表示第i天不持有股票所得最多现金，这个钱肯定是越多越好
+        int[] dp = new int[2];
+        //初始化
+        dp[0] = prices[0];
+        dp[1] = 0;
+
+        for (int i = 1; i < prices.length; i++) {
+            //更新股票最低价
+            dp[0] = Math.min(dp[0], prices[i]);
+            //这天卖出去得到的利润
+            dp[1] = Math.max(dp[1], prices[i] - dp[0]);
+        }
+        return dp[1];
     }
 }
