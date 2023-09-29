@@ -26,6 +26,12 @@ package a10_动态规划;
  */
 public class B27_买卖股票的最佳时机Ⅲ {
 
+    public static void main(String[] args) {
+        B27_买卖股票的最佳时机Ⅲ test = new B27_买卖股票的最佳时机Ⅲ();
+        int res = test.maxProfit(new int[]{2, 4, 1});
+        System.out.println("res = " + res);
+    }
+
     public int maxProfit(int[] prices) {
         //一共四种状态，分别是第一次买入，第一次卖出，第二次买入，第二次卖出
         //dp[i][0]表示遍历到第i天第一次买入花的钱，dp[i][1]表示第一次卖出赚的钱，dp[i][2]表示第二次买入花的钱，dp[i][3]表示第二次卖出赚的钱
