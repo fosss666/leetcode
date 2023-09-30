@@ -46,4 +46,21 @@ public class B28_买卖股票的最佳时机Ⅳ {
         return dp[prices.length - 1][2 * k - 1];
     }
 
+    /**
+     * 不用奇偶来判断是买还是卖
+     */
+    public int maxProfit2(int k, int[] prices) {
+        //dp[i][j],i表示到哪天，j表示买股票状态。一共有2k种状态，分别是第k次买入卖出。
+        int[][] dp = new int[prices.length][2 * k];
+        //初始化，每次买入花的钱都为prices[0]，每次卖出赚的钱为0
+        for (int i = 0; i < 2 * k; i += 2) dp[0][i] = prices[0];
+
+        for (int i = 1; i < prices.length; i++) {
+            for (int j = 0; j < k * 2 - 1; j += 2) {
+                dp[i][j] = Math.min(dp[i - 1][j], j == 0 ? prices[i] : prices[i] - dp[i - 1][j - 1]);
+                dp[i][j + 1] = Math.max(dp[i - 1][j + 1], prices[i] - dp[i - 1][j]);
+            }
+        }
+        return dp[prices.length - 1][2 * k - 1];
+    }
 }
