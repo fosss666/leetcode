@@ -18,6 +18,7 @@ import java.util.Scanner;
  * <p>
  * 样例输出：
  * 6
+ * <p>
  * 30
  */
 public class B05_A加B问题Ⅴ {
