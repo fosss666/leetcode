@@ -32,5 +32,6 @@ public class B02_A加B问题Ⅱ {
                 System.out.println(a + b);
             }
         }
+        sc.close();
     }
 }
