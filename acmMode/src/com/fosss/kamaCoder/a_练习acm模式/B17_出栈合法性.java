@@ -1,6 +1,7 @@
 package com.fosss.kamaCoder.a_练习acm模式;
 
-import java.util.*;
+import java.util.Scanner;
+import java.util.Stack;
 
 /**
  * 题目描述：
@@ -23,27 +24,26 @@ import java.util.*;
 public class B17_出栈合法性 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Stack<Integer> stack = new Stack<>();
         while (sc.hasNext()) {
-            //获取数量N
-            int N = Integer.valueOf(sc.nextLine());
-            //退出条件
+            int N = sc.nextInt();
             if (N == 0) break;
-            //获取下一行
-            String line = sc.nextLine();
-            //分割出数字
-            String[] nums = line.split(" ");
-            int index = 0;
 
-            for (int i = 1; i <= N; i++) {
+            int[] nums = new int[N];
+            for (int i = 0; i < N; i++)
+                nums[i] = sc.nextInt();
+
+            Stack<Integer> stack = new Stack<>();
+            int index = 0; // 指针用于遍历弹出序列数组
+            for (int i = 1; i <= N; i++) {//模拟入栈队列
                 stack.push(i);
-                while (!stack.isEmpty() && stack.peek() == Integer.valueOf(nums[index])) {
+                while (!stack.isEmpty() && stack.peek() == nums[index]) {
+                    //模拟出栈
                     stack.pop();
                     index++;
                 }
             }
-
-            if (stack.isEmpty()) {
+            //判断是否出栈完毕，全出栈则说明出栈队列是合法的
+            if (stack.isEmpty() && index == N) {
                 System.out.println("Yes");
             } else {
                 System.out.println("No");
