@@ -1,4 +1,4 @@
-package com.fosss.蓝桥杯真题.test;
+package com.fosss.日期枚举问题.test;
 
 import java.time.LocalDate;
 
@@ -25,7 +25,7 @@ import java.time.LocalDate;
  * 最大运行时间: 1s
  * 最大运行内存:128M
  */
-public class B01_日期枚举问题 {
+public class B01_完全日期 {
 
     public static void main(String[] args) {
         LocalDate start = LocalDate.of(2001, 1, 1);
