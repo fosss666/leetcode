@@ -1,5 +1,8 @@
 package a12_图论;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * @author: fosss
  * Date: 2023/11/22
@@ -10,6 +13,53 @@ package a12_图论;
  * 向上相邻的陆地连接形成。此外，你可以假设该网格的四条边均被水包围。
  */
 public class B02_岛屿数量 {
+
+    /**
+     * bfs
+     * ！！！需要注意将某点设置为已访问的时间，是在加入队列后而不是弹出队列后，否则会导致重复访问一些位置从而导致超时
+     */
+    public int numIslands2(char[][] grid) {
+        int res = 0;
+        boolean[][] visited = new boolean[grid.length][grid[0].length];
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                //未被访问且是陆地
+                if (!visited[i][j] && grid[i][j] == '1') {
+                    res++;
+                    bfs(grid, visited, i, j);
+                }
+            }
+        }
+        return res;
+    }
+
+    private void bfs(char[][] grid, boolean[][] visited, int i, int j) {
+        Queue<int[]> queue = new LinkedList<>();
+        //将当前位置放入队列
+        queue.add(new int[]{i, j});
+        //只要放入队列就设置已访问
+        visited[i][j] = true;
+
+        while (!queue.isEmpty()) {
+            //获取当前位置
+            int[] poll = queue.poll();
+            int x = poll[0];
+            int y = poll[1];
+            //遍历四个方向
+            for (int k = 0; k < 4; k++) {
+                //获取新坐标
+                //获取新坐标
+                int newX = x + directions[k][0];
+                int newY = y + directions[k][1];
+                //如果没越界
+                if (newX >= 0 && newX < grid.length && newY >= 0 && newY < grid[0].length && !visited[newX][newY] && grid[newX][newY] == '1') {
+                    //放入队列中，并设置为已访问
+                    queue.add(new int[]{newX, newY});
+                    visited[newX][newY] = true;
+                }
+            }
+        }
+    }
 
     /**
      * dfs
