@@ -40,6 +40,7 @@ public class B02_岛屿数量 {
         //只要放入队列就设置已访问
         visited[i][j] = true;
 
+        //队列中放的是岛屿包含的陆地，所以队列不为空就要持续处理
         while (!queue.isEmpty()) {
             //获取当前位置
             int[] poll = queue.poll();
