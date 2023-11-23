@@ -89,10 +89,10 @@ public class B02_岛屿数量 {
 
     //定义四个方向
     int[][] directions = {
-            {0, -1},//上
-            {1, 0},//右
-            {0, 1},//下
-            {-1, 0}//左
+            {-1, 0},//上
+            {0, 1},//右
+            {1, 0},//下
+            {0, -1}//左
     };
 
     private void dfs(char[][] grid, boolean[][] visited, int i, int j) {
